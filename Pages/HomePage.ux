@@ -10,7 +10,7 @@
 			</Each>
 
 			<Each Items="{movies}">
-				<Button Text="{title}" Clicked="{goToHike}" />
+				<Button Text="{title}" Clicked="{goToMovieDetails}" />
 			</Each>
 		</StackPanel>
 	</ScrollView>
