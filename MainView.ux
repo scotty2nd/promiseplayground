@@ -6,6 +6,7 @@
 			<HomePage ux:Template="home" router="router" />
 			<EditHikePage ux:Template="editHike" router="router" />
 			<ShowMovieDetailsPage ux:Template="showMovieDetails" router="router" />
+			<RegisterPage ux:Template="register" router="router" />
 		</Navigator>
 	</ClientPanel>
 </App>

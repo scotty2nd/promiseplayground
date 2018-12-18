@@ -1,0 +1,12 @@
+<Page ux:Class="RegisterPage">
+	<Router ux:Dependency="router" />
+	
+	<JavaScript File="RegisterPage.js" />
+
+	<ScrollView>
+		<StackPanel>
+				<Text>Register</Text>
+				<Button Text="Back" Clicked="{goBack}" />
+		</StackPanel>
+	</ScrollView>
+</Page>

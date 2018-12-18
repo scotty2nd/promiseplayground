@@ -12,6 +12,7 @@
 			<Each Items="{movies}">
 				<Button Text="{title}" Clicked="{goToMovieDetails}" />
 			</Each>
+			<Button Text="Register" Clicked="{goToRegister}" />
 		</StackPanel>
 	</ScrollView>
 </Page>
