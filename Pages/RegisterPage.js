@@ -1,32 +1,20 @@
+let Context = require("Modules/Context");
+
+let mail = Context.user.map(function(x) {  return x.mail; });
+let password = Context.user.map(function(x) { return x.password; });
+
 function goBack() {
 	router.goBack();
 }
 
-function sendRequest() {
-	const newPost = {
-    	email: "sydney@fife",
-    	password: "123"
-	}
-
-	const options = {
-	    method: 'POST',
-	    body: JSON.stringify(newPost),
-	    headers: new Headers({
-	        'Content-Type': 'application/json'
-	    })
-	}
-
-	fetch('https://reqres.in/api/register', options)
-    	.then(function(response){
-    		return response.json();
-    	})
-		.then(function(data){
-			console.dir(data);
-    		return data;
-    	})
+function register() {
+	Context.registerUser(mail.value, password.value);
 }
 
 module.exports = {
+	mail: mail,
+	password: password,
+
 	goBack: goBack,
-	sendRequest: sendRequest
+	register: register
 };

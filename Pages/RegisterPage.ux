@@ -6,11 +6,15 @@
 	<ScrollView>
 		<StackPanel>
 				<Text>RegisterPage</Text>
-				<TextInput PlaceholderText="Name"/>
-				<Text>Name2:</Text>
-				<TextBox />
+				<Text Value="{mail}" />
 
-				<Button Text="Send Request" Clicked="{sendRequest}" />
+				<Text>Mail:</Text>
+				<TextBox Value="{mail}" />
+
+				<Text>Password:</Text>
+				<TextBox Value="{password}" />
+
+				<Button Text="Register" Clicked="{register}" />
 				<Button Text="Back" Clicked="{goBack}" />
 		</StackPanel>
 	</ScrollView>

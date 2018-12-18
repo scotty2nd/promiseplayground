@@ -3,6 +3,7 @@ let Backend = require("./Backend");
 
 let hikes = Observable();
 let movies = Observable();
+let user = Observable();
 
 let baseImageUrl = 'http://image.tmdb.org/t/p/w780';
 
@@ -31,6 +32,29 @@ function compareByTitle(a,b) {
   if (a.title > b.title)
     return 1;
   return 0;
+}
+
+function registerUser(email, password) {
+	console.log('register User');
+	console.log(email);
+	console.log(password);
+
+	const user = {
+    	email: email,
+    	password: password
+	}
+
+	console.dir(user);
+	/*{
+		mail: "Testname",
+		password: "testpassword"
+	}*/
+
+	Backend.sendRegisterRequest(user)
+		.catch(function(error) {
+			console.log("Couldn't register user: " + email);
+		});
+
 }
 
 function updateHike(id, name, location, distance, rating, comments) {
@@ -63,7 +87,9 @@ module.exports = {
 
 	hikes: hikes,
 	movies: movies,
+	user: user,
 	baseImageUrl: baseImageUrl,
 
-	updateHike: updateHike
+	updateHike: updateHike,
+	registerUser: registerUser
 };
