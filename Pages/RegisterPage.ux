@@ -5,7 +5,12 @@
 
 	<ScrollView>
 		<StackPanel>
-				<Text>Register</Text>
+				<Text>RegisterPage</Text>
+				<TextInput PlaceholderText="Name"/>
+				<Text>Name2:</Text>
+				<TextBox />
+
+				<Button Text="Send Request" Clicked="{sendRequest}" />
 				<Button Text="Back" Clicked="{goBack}" />
 		</StackPanel>
 	</ScrollView>
