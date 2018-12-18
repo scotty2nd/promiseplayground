@@ -5,9 +5,17 @@
 
 	<ScrollView>
 		<StackPanel>
-			<Image Url="{fullposterpath}" />
-			<Text Value="{title}" FontSize="24" TextWrapping="Wrap" Margin="20" />
-			<Text Value="{overview}" TextWrapping="Wrap" Margin="20" />
+			<WhileNotEmpty Items="{fullposterpath}">
+				<Image Url="{fullposterpath}" />
+			</WhileNotEmpty>
+			
+			<WhileNotEmpty Items="{title}">
+				<Text Value="{title}" FontSize="24" TextWrapping="Wrap" Margin="20" />
+			</WhileNotEmpty>
+
+			<WhileNotEmpty Items="{overview}">
+				<Text Value="{overview}" TextWrapping="Wrap" Margin="20" />
+			</WhileNotEmpty>
 
 			<Button Text="Back" Clicked="{goBack}" />
 		</StackPanel>

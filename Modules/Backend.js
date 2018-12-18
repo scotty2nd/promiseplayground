@@ -61,6 +61,7 @@ function getMovies() {
 		.catch((error) => console.error(error));
 }
 
+/*Original Example*/
 function getHikes() {
 	return new Promise(function(resolve, reject) {
 		setTimeout(function() { 					// Nur zum Delay testen / Optional
