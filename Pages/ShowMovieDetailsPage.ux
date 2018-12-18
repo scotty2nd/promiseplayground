@@ -1,0 +1,15 @@
+<Page ux:Class="ShowMovieDetailsPage">
+	<Router ux:Dependency="router" />
+	
+	<JavaScript File="ShowMovieDetails.js" />
+
+	<ScrollView>
+		<StackPanel>
+			<Image Url="{fullposterpath}" />
+			<Text Value="{title}" FontSize="24" TextWrapping="Wrap" Margin="20" />
+			<Text Value="{overview}" TextWrapping="Wrap" Margin="20" />
+
+			<Button Text="Back" Clicked="{goBack}" />
+		</StackPanel>
+	</ScrollView>
+</Page>

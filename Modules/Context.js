@@ -60,7 +60,7 @@ function updateHike(id, name, location, distance, rating, comments) {
 
 module.exports = {
 	Observable: Observable,
-	
+
 	hikes: hikes,
 	movies: movies,
 	baseImageUrl: baseImageUrl,
