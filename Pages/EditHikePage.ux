@@ -22,10 +22,6 @@
 			<Text>Comments:</Text>
 			<TextView Value="{comments}" TextWrapping="Wrap" />
 
-			<Text>Title:</Text>
-			<TextBox Value="{title}" />
-			<Image Url="{fullposterpath}" />
-
 			<Button Text="Save" Clicked="{save}" />
 			<Button Text="Cancel" Clicked="{cancel}" />
 		</StackPanel>

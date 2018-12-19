@@ -1,3 +1,39 @@
+function getMovies() {
+	return fetch('https://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year=2018')
+		.then(function(response){
+	      	if (!response.ok) {
+	        	throw new Error("HTTP error, status = " + response.status);
+	      	}
+
+			return response.json();
+		})
+		.catch((error) => console.error(error));
+}
+
+function sendRegisterRequest(user) {
+	const options = {
+	    method: 'POST',
+	    body: JSON.stringify(user),
+	    headers: new Headers({
+	        'Content-Type': 'application/json'
+	    })
+	}
+
+	return fetch('https://reqres.in/api/register', options)
+    	.then(function(response){
+    		return response.json();
+    	})
+		.then(function(data){
+			console.dir(data);
+    		return data;
+    	})
+    	.catch((error) => console.error(error));
+}
+
+/**
+ * Original Example
+**/
+
 let hikes = [
 	{
 		id: 0,
@@ -48,40 +84,6 @@ let hikes = [
 		comments: "Lorem ipsum"
 	}
 ];
-
-function getMovies() {
-	return fetch('https://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year=2018')
-		.then(function(response){
-	      	if (!response.ok) {
-	        	throw new Error("HTTP error, status = " + response.status);
-	      	}
-
-			return response.json();
-		})
-		.catch((error) => console.error(error));
-}
-
-function sendRegisterRequest(user) {
-	const options = {
-	    method: 'POST',
-	    body: JSON.stringify(user),
-	    headers: new Headers({
-	        'Content-Type': 'application/json'
-	    })
-	}
-
-	return fetch('https://reqres.in/api/register', options)
-    	.then(function(response){
-    		return response.json();
-    	})
-		.then(function(data){
-			console.dir(data);
-    		return data;
-    	})
-    	.catch((error) => console.error(error));
-}
-
-/*Original Example*/
 function getHikes() {
 	return new Promise(function(resolve, reject) {
 		setTimeout(function() { 					// Nur zum Delay testen / Optional

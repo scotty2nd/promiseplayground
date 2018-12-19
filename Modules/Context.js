@@ -1,12 +1,12 @@
 let Observable = require("FuseJS/Observable");
 let Backend = require("./Backend");
 
-let hikes = Observable();
 let movies = Observable();
 let user = Observable();
 
 let baseImageUrl = 'http://image.tmdb.org/t/p/w780';
 
+// getMovies returns a promise with a array of movie objects
 Backend.getMovies()
 	.then(function(response) {
 		var sortedResponse = response.results.sort(compareByTitle);
@@ -15,15 +15,6 @@ Backend.getMovies()
 	})
 	.catch(function(error) {
 		console.log("Couldn't get movies: " + error);
-	});
-
-/*getHikes returns a promise with hike an object*/
-Backend.getHikes()
-	.then(function(newHikes) {
-		hikes.replaceAll(newHikes);
-	})
-	.catch(function(error) {
-		console.log("Couldn't get hikes: " + error);
 	});
 
 function compareByTitle(a,b) {
@@ -35,32 +26,33 @@ function compareByTitle(a,b) {
 }
 
 function registerUser(email, password) {
-	console.log('register User');
-	console.log(email);
-	console.log(password);
-
 	const user = {
     	email: email,
     	password: password
 	}
 
-	console.dir(user);
-	/*{
-		mail: "Testname",
-		password: "testpassword"
-	}*/
-
 	Backend.sendRegisterRequest(user)
 		.catch(function(error) {
 			console.log("Couldn't register user: " + email);
 		});
-
 }
 
-function updateHike(id, name, location, distance, rating, comments) {
-	console.log('context update');
-	console.log(name);
+/**
+ * Original Example
+**/
 
+let hikes = Observable();
+
+/*getHikes returns a promise with hike an object*/
+Backend.getHikes()
+	.then(function(newHikes) {
+		hikes.replaceAll(newHikes);
+	})
+	.catch(function(error) {
+		console.log("Couldn't get hikes: " + error);
+	});
+
+function updateHike(id, name, location, distance, rating, comments) {
 	/*Hier kein for of möglich da über observable iteriert wird*/
 	for (let i = 0; i < hikes.length; i++) {
 		let hike = hikes.getAt(i);
