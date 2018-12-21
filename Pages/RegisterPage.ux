@@ -6,23 +6,21 @@
 	<ScrollView>
 		<StackPanel>
 				<Text>RegisterPage</Text>
-				<StackPanel Orientation="Horizontal">
-						<Text>Eingegebene Mail: </Text>
-						
-						<WhileNotEmpty Items="{mail}">
-							<Text Value="{mail}" />
-						</WhileNotEmpty>
-				</StackPanel>
 
 				<Text>Mail:</Text>
-				<TextBox Value="{mail}" />
+				<TextBox Value="{email}" />
 
 				<Text>Password:</Text>
 				<TextBox Value="{password}" />
 
-				<Text>Error:</Text>
-				<WhileNotEmpty Items="{error}">
-					<Text Value="{error}" />
+				<Text>Eingegebene Mail: </Text>
+				<WhileNotEmpty Items="{email}">
+					<Text Value="{email}" />
+				</WhileNotEmpty>
+
+				<Text>Eingegebene Passwort: </Text>
+				<WhileNotEmpty Items="{password}">
+					<Text Value="{password}" />
 				</WhileNotEmpty>
 
 				<Text>Message:</Text>
@@ -33,6 +31,11 @@
 				<Text>Token:</Text>
 				<WhileNotEmpty Items="{token}">
 					<Text Value="{token}" />
+				</WhileNotEmpty>
+
+				<Text>Error:</Text>
+				<WhileNotEmpty Items="{error}">
+					<Text Value="{error}" />
 				</WhileNotEmpty>
 
 				<Button Text="Register" Clicked="{register}" />

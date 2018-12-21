@@ -7,9 +7,6 @@ let status = Observable();
 
 let baseImageUrl = 'http://image.tmdb.org/t/p/w780';
 
-console.log(status.value);
-
-
 // getMovies returns a promise with a array of movie objects
 Backend.getMovies()
 	.then(function(response) {
@@ -30,14 +27,41 @@ function compareByTitle(a,b) {
 }
 
 function registerUser(email, password) {
-	const user = {
+	console.log('regiter User');
+	console.log(email);
+	console.log(password);
+	console.log('User Obervable alt');
+	console.dir(user.value);
+	console.log('Status Obervable alt');
+	console.dir(status.value);
+
+	if(password == ""){
+		password = null;
+	}
+
+	if(email == ""){
+		email = null;
+	}
+
+	const userData = {
     	email: email,
     	password: password
 	}
 
-	//To Do: Token Response verwerten
-	Backend.sendRegisterRequest(user)
+	//UserData in Obervable schreiben
+	user.value = userData;
+
+	console.log('User Obervable aktualisiert');
+	console.dir(user.value);
+
+	//Erzeugt den gleichen output
+	//console.dir(user._values[0].email);
+	//console.dir(user.value.email);
+
+	//User Daten ans Backend schicken und response verarbeiten
+	Backend.sendRegisterRequest(userData)
 		.then(function(response){
+			console.dir(response);
 			if(response.token){
 				status.value = {
 					token: response.token, 
@@ -50,6 +74,8 @@ function registerUser(email, password) {
 					message: "Registration failed"
 				};
 			}
+			console.log('Status Obervable aktualisiert');
+			console.dir(status.value);
 		})
 		.catch(function(error) {
 			console.log("Couldn't register user: " + error);
@@ -72,10 +98,15 @@ Backend.getHikes()
 	});
 
 function updateHike(id, name, location, distance, rating, comments) {
-	/*Hier kein for of möglich da über observable iteriert wird*/
+	/*console.log('update hike');
+	console.dir(hikes._values[0]);*/
+	
+	//Observable Werte aktualisieren
+	//Hier kein for of möglich da über observable iteriert wird
 	for (let i = 0; i < hikes.length; i++) {
 		let hike = hikes.getAt(i);
 
+		console.log(i);
 		if (hike.id == id) {
 			hike.name = name;
 			hike.location = location;
@@ -85,8 +116,10 @@ function updateHike(id, name, location, distance, rating, comments) {
 			hikes.replaceAt(i, hike);
 			break;
 		}
+		//console.dir(hike.name);
 	}
 
+	//Formular Daten an die Api schicken
 	Backend.updateHike(id, name, location, distance, rating, comments)
 		.catch(function(error) {
 			console.log("Couldn't update hike: " + id);

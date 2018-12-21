@@ -15,8 +15,12 @@ let fullposterpath = Context.Observable(function() {
 })
 
 function save() {
+	console.log('hike save');
+	console.dir(hike.value);
+	//console.dir(name.value);
 	Context.updateHike(hike.value.id, name.value, location.value, distance.value, rating.value, comments.value);
 	router.goBack();
+
 }
 
 function cancel() {
