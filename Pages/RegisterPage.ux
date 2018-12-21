@@ -8,10 +8,21 @@
 				<Text>RegisterPage</Text>
 
 				<Text Margin="0, 20, 0, 0">Mail:</Text>
-				<TextBox Value="{email}" />
+				<TextInput Value="{email}" Height="30" Padding="5">
+			        <Rectangle CornerRadius="4" Layer="Background">
+			            <Stroke Width="1" Color="#BBB" />
+			        </Rectangle>
+				</TextInput>
+
+				<Text Margin="0, 20, 0, 0">Mail:</Text>
+				<EmailInput />
 
 				<Text Margin="0, 20, 0, 0">Password:</Text>
-				<TextBox Value="{password}" />
+				<TextInput Value="{password}" IsPassword="true" Height="30" Padding="5">
+			        <Rectangle CornerRadius="4" Layer="Background">
+			            <Stroke Width="1" Brush="#BBB" />
+			        </Rectangle>
+				</TextInput>
 
 				<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
 				<WhileNotEmpty Items="{email}">
@@ -42,4 +53,43 @@
 				<Button Text="Back" Clicked="{goBack}" />
 		</StackPanel>
 	</ScrollView>
+
+	<TextInput ux:Class="EmailInput" Height="30" Padding="5" Value="{Property Text}">
+	    <string ux:Property="Text" />
+	    <bool ux:Property="IsValid" />
+
+	    <Rectangle CornerRadius="4" Layer="Background">
+	        <Stroke ux:Name="stroke" Width="1" Color="#BBB" />
+	    </Rectangle>
+
+    	<WhileNotFocused>
+	      <JavaScript>
+	      	  let RegisterPage = require("Pages/RegisterPage");
+  	          let text = this.Text.value;
+
+	          this.IsValid.value = false;
+
+  	          if(RegisterPage.validateEmail(text)) {
+  	          	this.IsValid.value = true;
+  	          	//RegisterPage.Context.status.value = 'test456';
+  	          	console.dir(RegisterPage.error.value);
+  	          }else {
+  	          	this.IsValid.value = false;
+  	          	//RegisterPage.Context.status.value = 'test123';
+  	          	console.dir(RegisterPage.error.value);
+  	          }
+	      </JavaScript>
+
+	      <WhileContainsText>
+	      	<WhileFalse Value="{Property IsValid}">
+		          <Change stroke.Color="Red" />
+		      </WhileFalse>
+
+		      <WhileTrue Value="{Property IsValid}">
+		          <Change stroke.Color="Green" />
+		      </WhileTrue>
+	      </WhileContainsText>
+
+	    </WhileNotFocused>
+	</TextInput>
 </Page>
