@@ -13,6 +13,11 @@
 				<Button Text="{title}" Clicked="{goToMovieDetails}" />
 			</Each>
 			<Button Text="Register" Clicked="{goToRegister}" />
+
+			<WhileNotEmpty Items="{token}">
+				<Text>Token:</Text>
+				<Text Value="{token}" />
+			</WhileNotEmpty>
 		</StackPanel>
 	</ScrollView>
 </Page>

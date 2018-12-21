@@ -3,37 +3,37 @@
 	
 	<JavaScript File="RegisterPage.js" />
 
-	<ScrollView>
+	<ScrollView Padding="20">
 		<StackPanel>
 				<Text>RegisterPage</Text>
 
-				<Text>Mail:</Text>
+				<Text Margin="0, 20, 0, 0">Mail:</Text>
 				<TextBox Value="{email}" />
 
-				<Text>Password:</Text>
+				<Text Margin="0, 20, 0, 0">Password:</Text>
 				<TextBox Value="{password}" />
 
-				<Text>Eingegebene Mail: </Text>
+				<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
 				<WhileNotEmpty Items="{email}">
 					<Text Value="{email}" />
 				</WhileNotEmpty>
 
-				<Text>Eingegebene Passwort: </Text>
+				<Text Margin="0, 10, 0, 0">Eingegebene Passwort: </Text>
 				<WhileNotEmpty Items="{password}">
 					<Text Value="{password}" />
 				</WhileNotEmpty>
 
-				<Text>Message:</Text>
+				<Text Margin="0, 10, 0, 0">Message:</Text>
 				<WhileNotEmpty Items="{message}">
 					<Text Value="{message}" />
 				</WhileNotEmpty>
 
-				<Text>Token:</Text>
+				<Text Margin="0, 10, 0, 0">Token:</Text>
 				<WhileNotEmpty Items="{token}">
 					<Text Value="{token}" />
 				</WhileNotEmpty>
 
-				<Text>Error:</Text>
+				<Text Margin="0, 10, 0, 0">Error:</Text>
 				<WhileNotEmpty Items="{error}">
 					<Text Value="{error}" />
 				</WhileNotEmpty>

@@ -1,5 +1,7 @@
 let Context = require("Modules/Context");
 
+let token = Context.status.map(function(x) { return x.token; }).inner();
+
 function goToHike(arg) {
 	let hike = arg.data;
 	router.push("editHike", hike);
@@ -20,6 +22,8 @@ function goToRegister() {
 module.exports = {
 	hikes: Context.hikes,
 	movies: Context.movies,
+
+	token: token,
 
 	goToHike: goToHike,
 	goToMovieDetails: goToMovieDetails,
