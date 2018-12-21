@@ -3,8 +3,12 @@ let Backend = require("./Backend");
 
 let movies = Observable();
 let user = Observable();
+let status = Observable();
 
 let baseImageUrl = 'http://image.tmdb.org/t/p/w780';
+
+console.log(status.value);
+
 
 // getMovies returns a promise with a array of movie objects
 Backend.getMovies()
@@ -31,9 +35,24 @@ function registerUser(email, password) {
     	password: password
 	}
 
+	//To Do: Token Response verwerten
 	Backend.sendRegisterRequest(user)
+		.then(function(response){
+			if(response.token){
+				status.value = {
+					token: response.token, 
+					message: "Registration Successfull"
+				};
+
+			}else {
+				status.value = {
+					error: response.error, 
+					message: "Registration failed"
+				};
+			}
+		})
 		.catch(function(error) {
-			console.log("Couldn't register user: " + email);
+			console.log("Couldn't register user: " + error);
 		});
 }
 
@@ -80,6 +99,7 @@ module.exports = {
 	hikes: hikes,
 	movies: movies,
 	user: user,
+	status: status,
 	baseImageUrl: baseImageUrl,
 
 	updateHike: updateHike,
