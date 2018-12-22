@@ -8,7 +8,7 @@
 				<Text>RegisterPage</Text>
 
 				<Text Margin="0, 20, 0, 0">Mail:</Text>
-				<EmailInput InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
+				<EmailInput Value="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
 
 				<Text Margin="0, 20, 0, 0">Password:</Text>
 				<TextInput Value="{password}" IsPassword="true" Height="30" Padding="5" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
