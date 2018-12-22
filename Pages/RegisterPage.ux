@@ -8,20 +8,17 @@
 				<Text>RegisterPage</Text>
 
 				<Text Margin="0, 20, 0, 0">Mail:</Text>
-				<TextInput Value="{email}" Height="30" Padding="5">
-			        <Rectangle CornerRadius="4" Layer="Background">
-			            <Stroke Width="1" Color="#BBB" />
-			        </Rectangle>
-				</TextInput>
-
-				<Text Margin="0, 20, 0, 0">Mail:</Text>
-				<EmailInput />
+				<EmailInput InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
 
 				<Text Margin="0, 20, 0, 0">Password:</Text>
-				<TextInput Value="{password}" IsPassword="true" Height="30" Padding="5">
+				<TextInput Value="{password}" IsPassword="true" Height="30" Padding="5" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
 			        <Rectangle CornerRadius="4" Layer="Background">
 			            <Stroke Width="1" Brush="#BBB" />
 			        </Rectangle>
+
+				    <TextInputActionTriggered>
+				        <ReleaseFocus />
+				    </TextInputActionTriggered>
 				</TextInput>
 
 				<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
@@ -49,10 +46,31 @@
 					<Text Value="{error}" />
 				</WhileNotEmpty>
 
-				<Button Text="Register" Clicked="{register}" />
+				<MyButton Text="Register" Clicked="{register}" Disabled="{error}"/>
 				<Button Text="Back" Clicked="{goBack}" />
 		</StackPanel>
 	</ScrollView>
+
+	<Button ux:Class="MyButton" HitTestMode="LocalBounds" Padding="10">
+        <bool ux:Property="Disabled" />
+
+        <Rectangle ux:Name="box" Layer="Background" CornerRadius="10">
+            <Shadow Color="#0060" Size="2"/>
+            <Stroke Width="4">
+                <SolidColor ux:Name="stroke" Color="#124F63" />
+            </Stroke>
+        </Rectangle>
+
+        <WhilePressed>
+        	<ReleaseFocus />
+            <Scale Factor=".95" Duration=".08" Easing="QuadraticOut" />
+        </WhilePressed>
+
+        <WhileTrue Value="{ReadProperty Disabled}">
+            <Change stroke.Color="Gray" Duration=".08" Easing="QuadraticOut" />
+            <Change box.Color="Gray" Duration=".08" Easing="QuadraticOut" />
+        </WhileTrue>
+	</Button>
 
 	<TextInput ux:Class="EmailInput" Height="30" Padding="5" Value="{Property Text}">
 	    <string ux:Property="Text" />
@@ -64,20 +82,30 @@
 
     	<WhileNotFocused>
 	      <JavaScript>
-	      	  let RegisterPage = require("Pages/RegisterPage");
+	      	  let Context = require("Modules/Context");
   	          let text = this.Text.value;
+  	          let message = Context.status.map(function(x) { return x.message; }).inner();
+  	          let error = Context.status.map(function(x) { return x.error; }).inner();
 
 	          this.IsValid.value = false;
 
-  	          if(RegisterPage.validateEmail(text)) {
+  	          if(Context.validateEmail(text)) {
   	          	this.IsValid.value = true;
-  	          	//RegisterPage.Context.status.value = 'test456';
-  	          	console.dir(RegisterPage.error.value);
+  	          	Context.status.value = {error: false};
   	          }else {
   	          	this.IsValid.value = false;
-  	          	//RegisterPage.Context.status.value = 'test123';
-  	          	console.dir(RegisterPage.error.value);
+  	          	Context.status.value = {
+  	          		message: 'Invalid or Empty Email Adress',
+  	          		error: true
+  	          	};
   	          }
+
+  	          console.dir(Context.status.value);
+
+  	          module.exports = {
+  	          	message: message,
+				error: error
+			};
 	      </JavaScript>
 
 	      <WhileContainsText>

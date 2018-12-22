@@ -5,6 +5,8 @@
 
 	<ScrollView>
 		<StackPanel>
+			<Button Text="Register" Clicked="{goToRegister}" />
+			
 			<Each Items="{hikes}">
 				<Button Text="{name}" Clicked="{goToHike}" />
 			</Each>
@@ -12,7 +14,6 @@
 			<Each Items="{movies}">
 				<Button Text="{title}" Clicked="{goToMovieDetails}" />
 			</Each>
-			<Button Text="Register" Clicked="{goToRegister}" />
 
 			<WhileNotEmpty Items="{token}">
 				<Text>Token:</Text>

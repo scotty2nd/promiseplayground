@@ -26,6 +26,12 @@ function compareByTitle(a,b) {
   return 0;
 }
 
+function validateEmail(email) {
+  let result = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  
+  return result.test(email);
+}
+
 function registerUser(email, password) {
 	console.log('regiter User');
 	console.log(email);
@@ -136,5 +142,6 @@ module.exports = {
 	baseImageUrl: baseImageUrl,
 
 	updateHike: updateHike,
+	validateEmail: validateEmail,
 	registerUser: registerUser
 };

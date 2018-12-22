@@ -11,24 +11,18 @@ function goBack() {
 }
 
 function register() {
-	/*if( validateEmail(email.value) ){
-		console.log('if');
-	}else {
-		console.log('else');
-	}*/
+	console.log('register');
+	if( !error.value ) {
+		console.log('kein fehler');
+		console.log(error.value);
+		//Context.registerUser(email.value, password.value);
+	}else{
+		console.log('fehler');
+		console.log(error.value);
+	}
 
-	console.dir(Context.status);
-	console.dir(Context.status);
-	//console.log(error.value);
+	//
 
-	//Context.registerUser(email.value, password.value);
-
-}
-
-function validateEmail(email) {
-  let result = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  
-  return result.test(email);
 }
 
 module.exports = {
@@ -39,6 +33,5 @@ module.exports = {
 	error: error,
 
 	goBack: goBack,
-	register: register,
-	validateEmail: validateEmail
+	register: register
 };
