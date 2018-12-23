@@ -12,17 +12,20 @@ function goBack() {
 
 function register() {
 	console.log('register');
-	if( !error.value ) {
+
+	if( error.value === false) {
 		console.log('kein fehler');
 		console.log(error.value);
 		//Context.registerUser(email.value, password.value);
 	}else{
 		console.log('fehler');
 		console.log(error.value);
+		//error.value = true;
+      	Context.status.value = {
+      		message: 'Empty Email Adress',
+      		error: true
+      	};
 	}
-
-	//
-
 }
 
 module.exports = {
