@@ -96,6 +96,13 @@
 	  	          		error: true
 	  	          	};
 	  	          }
+	  	      }else{
+	  	      	if(Context.status.value){
+  	          		Context.status.value = {
+	  	          		message: 'Invalid or Empty Email Adress',
+	  	          		error: true
+	  	          	};
+	  	      	}
 	  	      }
 
   	          module.exports = {
