@@ -5,49 +5,87 @@
 
 	<ScrollView Padding="20">
 		<StackPanel>
-				<Text>RegisterPage</Text>
+			<Text>RegisterPage</Text>
 
-				<Text Margin="0, 20, 0, 0">Mail:</Text>
-				<EmailInput Value="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
+			<Text Margin="0, 20, 0, 0">Mail:</Text>
+			<EmailInput Value="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
 
-				<Text Margin="0, 20, 0, 0">Password:</Text>
-				<TextInput Value="{password}" IsPassword="true" Height="30" Padding="5" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
-			        <Rectangle CornerRadius="4" Layer="Background">
-			            <Stroke Width="1" Brush="#BBB" />
-			        </Rectangle>
+			<!--<Text Margin="0, 20, 0, 0">Password:</Text>
+			<TextInput Value="{password}" IsPassword="true" Height="30" Padding="5" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
+		        <Rectangle CornerRadius="4" Layer="Background">
+		            <Stroke Width="1" Brush="#BBB" />
+		        </Rectangle>
 
-				    <TextInputActionTriggered>
-				        <ReleaseFocus />
-				    </TextInputActionTriggered>
-				</TextInput>
+			    <TextInputActionTriggered>
+			        <ReleaseFocus />
+			    </TextInputActionTriggered>
+			</TextInput>-->
 
-				<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
-				<WhileNotEmpty Items="{email}">
-					<Text Value="{email}" />
-				</WhileNotEmpty>
+			<Text Margin="0, 20, 0, 0">Pasword:</Text>
+			<PasswordInput Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}"/>
 
-				<Text Margin="0, 10, 0, 0">Eingegebene Passwort: </Text>
-				<WhileNotEmpty Items="{password}">
-					<Text Value="{password}" />
-				</WhileNotEmpty>
+			<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
+			<WhileNotEmpty Items="{email}">
+				<Text Value="{email}" />
+			</WhileNotEmpty>
 
-				<Text Margin="0, 10, 0, 0">Message:</Text>
-				<WhileNotEmpty Items="{message}">
-					<Text Value="{message}" />
-				</WhileNotEmpty>
+			<Text Margin="0, 10, 0, 0">Eingegebene Passwort: </Text>
+			<WhileNotEmpty Items="{password}">
+				<Text Value="{password}" />
+			</WhileNotEmpty>
 
-				<Text Margin="0, 10, 0, 0">Token:</Text>
-				<WhileNotEmpty Items="{token}">
-					<Text Value="{token}" />
-				</WhileNotEmpty>
+			<Text Margin="0, 10, 0, 0">Message:</Text>
+			<WhileNotEmpty Items="{message}">
+				<Text Value="{message}" />
+			</WhileNotEmpty>
 
-				<Text Margin="0, 10, 0, 0">Error:</Text>
-				<WhileNotEmpty Items="{error}">
-					<Text Value="{error}" />
-				</WhileNotEmpty>
+			<Text Margin="0, 10, 0, 0">Token:</Text>
+			<WhileNotEmpty Items="{token}">
+				<Text Value="{token}" />
+			</WhileNotEmpty>
 
-				<Button Text="Register" Clicked="{register}" />
-				<Button Text="Back" Clicked="{goBack}" />
+			<Text Margin="0, 10, 0, 0">Error:</Text>
+			<WhileNotEmpty Items="{error}">
+				<Text Value="{error}" />
+			</WhileNotEmpty>
+
+			<Button Text="Register" Clicked="{register}" />
+			<Button Text="Back" Clicked="{goBack}" />
 		</StackPanel>
 	</ScrollView>
+
+	<TextInput ux:Class="PasswordInput" Height="30" Padding="5" Value="{Property Text}">
+	    <string ux:Property="Text" />
+
+	    <Rectangle CornerRadius="4" Layer="Background">
+	        <Stroke ux:Name="stroke" Width="1" Color="#BBB" />
+	    </Rectangle>
+
+	    <WhileNotFocused>
+	    	<JavaScript>
+				let Context = require("Modules/Context");
+				let enteredPassword = this.Text.value;
+				/*let message = Context.status.map(function(x) { return x.message; }).inner();
+				let error = Context.status.map(function(x) { return x.error; }).inner();*/
+
+				if(enteredPassword != ""){
+					console.log('if');
+				  	console.log(Context.checkPassword(enteredPassword));
+				}else{
+					console.log('else');
+					/*if(Context.status.value){
+						Context.status.value = {
+				  		message: 'Invalid or Empty Password else if',
+				  		error: true
+				  	};
+					}*/
+				}
+
+	          	module.exports = {
+		          	//message: message,
+					//error: error
+				};
+      		</JavaScript>
+	    </WhileNotFocused>
+	</TextInput>
 </Page>

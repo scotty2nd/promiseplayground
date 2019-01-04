@@ -11,9 +11,11 @@
 				<Button Text="{name}" Clicked="{goToHike}" />
 			</Each>
 
-			<Each Items="{movies}">
-				<Button Text="{title}" Clicked="{goToMovieDetails}" />
-			</Each>
+			<WhileNotEmpty Items="{movies}">
+				<Each Items="{movies}">
+					<Button Text="{title}" Clicked="{goToMovieDetails}" />
+				</Each>
+			</WhileNotEmpty>
 
 			<WhileNotEmpty Items="{token}">
 				<Text>Token:</Text>

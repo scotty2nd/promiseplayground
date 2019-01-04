@@ -18,20 +18,6 @@ Backend.getMovies()
 		console.log("Couldn't get movies: " + error);
 	});
 
-function compareByTitle(a,b) {
-  if (a.title < b.title)
-    return -1;
-  if (a.title > b.title)
-    return 1;
-  return 0;
-}
-
-function validateEmail(email) {
-  let result = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  
-  return result.test(email);
-}
-
 function registerUser(email, password) {
 	console.log('regiter User');
 	console.log(email);
@@ -88,6 +74,113 @@ function registerUser(email, password) {
 		});
 }
 
+
+function compareByTitle(a,b) {
+  if (a.title < b.title)
+    return -1;
+  if (a.title > b.title)
+    return 1;
+  return 0;
+}
+
+function validateEmail(email) {
+  let result = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  
+  return result.test(email);
+}
+
+function checkPassword(strPassword) {
+	// Reset combination count
+	var nScore = 0;
+	const m_strUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		  m_strLowerCase = "abcdefghijklmnopqrstuvwxyz",
+		  m_strNumber = "0123456789",
+		  m_strCharacters = "!@#$%^&*?_~";
+
+	// Password length
+	if (strPassword.length < 5) {
+		// Less than 4 characters
+	    nScore += 5;
+	}else if (strPassword.length > 4 && strPassword.length < 8) {
+	    // 5 to 7 characters
+	    nScore += 10;
+	}else if (strPassword.length > 7) {
+		// 8 or more
+	    nScore += 25;
+	}
+
+	// Letters
+	var nUpperCount = countContain(strPassword, m_strUpperCase),
+		nLowerCount = countContain(strPassword, m_strLowerCase),
+		nLowerUpperCount = nUpperCount + nLowerCount;
+
+	if (nUpperCount == 0 && nLowerCount != 0) {
+		// Letters are all lower case 
+	    nScore += 10; 
+	}else if (nUpperCount != 0 && nLowerCount != 0) {
+	    // Letters are upper case and lower case 
+	    nScore += 20; 
+	}
+
+	// Numbers
+	var nNumberCount = countContain(strPassword, m_strNumber);
+
+	if (nNumberCount == 1) {
+	    // 1 number
+	    nScore += 10;
+	}
+
+	if (nNumberCount >= 3) {
+		// 3 or more numbers
+	    nScore += 20;
+	}
+
+	// Characters
+	var nCharacterCount = countContain(strPassword, m_strCharacters);
+
+	// 1 character
+	if (nCharacterCount == 1) {
+	    nScore += 10;
+	}   
+
+	// More than 1 character
+	if (nCharacterCount > 1) {
+	    nScore += 25;
+	}
+
+	// Bonus for combination
+	// Letters and numbers
+	if (nNumberCount != 0 && nLowerUpperCount != 0) {
+	    nScore += 2;
+	}
+
+	// Letters, numbers, and characters
+	if (nNumberCount != 0 && nLowerUpperCount != 0 && nCharacterCount != 0) {
+	    nScore += 3;
+	}
+
+	// Mixed case letters, numbers, and characters
+	if (nNumberCount != 0 && nUpperCount != 0 && nLowerCount != 0 && nCharacterCount != 0) {
+	    nScore += 5;
+	}
+
+	return nScore;
+}
+
+// Checks a string for a list of characters
+function countContain(strPassword, strCheck) { 
+    // Declare variables
+    var nCount = 0;
+
+    for (let i = 0; i < strPassword.length; i++) {
+        if (strCheck.indexOf(strPassword.charAt(i)) > -1) { 
+        	nCount++;
+        } 
+    } 
+
+    return nCount; 
+} 
+
 /**
  * Original Example
 **/
@@ -142,6 +235,8 @@ module.exports = {
 	baseImageUrl: baseImageUrl,
 
 	updateHike: updateHike,
+	registerUser: registerUser,
 	validateEmail: validateEmail,
-	registerUser: registerUser
+	checkPassword: checkPassword
+
 };

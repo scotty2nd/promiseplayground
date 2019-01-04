@@ -8,12 +8,12 @@
 	<WhileNotFocused>
   		<JavaScript>
       	  let Context = require("Modules/Context");
-	          let text = this.Text.value;
+	          let enteredEmail = this.Text.value;
 	          let message = Context.status.map(function(x) { return x.message; }).inner();
 	          let error = Context.status.map(function(x) { return x.error; }).inner();
 
-  	      if(text != ""){
-  	          if(Context.validateEmail(text)) {
+  	      if(enteredEmail != ""){
+  	          if(Context.validateEmail(enteredEmail)) {
   	          	Context.status.value = {error: false};
   	          }else{
 	          		Context.status.value = {
