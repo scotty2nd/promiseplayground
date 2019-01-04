@@ -11,18 +11,16 @@ function goBack() {
 }
 
 function register() {
-	console.log('register');
-
 	if( error.value === false) {
-		console.log('kein fehler');
+		console.log('register kein fehler');
 		console.log(error.value);
 		//Context.registerUser(email.value, password.value);
 	}else{
-		console.log('fehler');
+		console.log('register fehler');
 		console.log(error.value);
 		//error.value = true;
       	Context.status.value = {
-      		message: 'Empty Email Adress',
+      		message: 'Invalid or Empty Email Adress',
       		error: true
       	};
 	}
