@@ -65,27 +65,40 @@
 	    	<JavaScript>
 				let Context = require("Modules/Context");
 				let enteredPassword = this.Text.value;
-				/*let message = Context.status.map(function(x) { return x.message; }).inner();
-				let error = Context.status.map(function(x) { return x.error; }).inner();*/
 
 				if(enteredPassword != ""){
+					if(Context.checkPassword(enteredPassword) >= 60){
+					  	Context.status.value = {
+					  		message: 'test123',
+					  		error: false
+					  	};
+					}else {
+					  	Context.status.value = {
+					  		message: 'Invalid or Empty Password',
+					  		error: true
+					  	};
+					}
+
 					console.log('if');
 				  	console.log(Context.checkPassword(enteredPassword));
 				}else{
 					console.log('else');
-					/*if(Context.status.value){
-						Context.status.value = {
-				  		message: 'Invalid or Empty Password else if',
-				  		error: true
-				  	};
-					}*/
+		  	      	if(Context.status.value){
+          				Context.status.value = {
+		  	          		message: 'Invalid or Empty Password',
+		  	          		error: true
+		  	          	};
+	  	      		}
 				}
-
-	          	module.exports = {
-		          	//message: message,
-					//error: error
-				};
       		</JavaScript>
 	    </WhileNotFocused>
+
+	  	<WhileString Value="{error}" Equals="true" CaseSensitive="false">
+      		<Change stroke.Color="Red" />
+      	</WhileString>
+
+      	<WhileString Value="{error}" Equals="false" CaseSensitive="false">
+	   		<Change stroke.Color="Green" />
+      	</WhileString>
 	</TextInput>
 </Page>
