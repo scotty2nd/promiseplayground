@@ -10,19 +10,12 @@
 			<Text Margin="0, 20, 0, 0">Mail:</Text>
 			<EmailInput Value="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
 
-			<!--<Text Margin="0, 20, 0, 0">Password:</Text>
-			<TextInput Value="{password}" IsPassword="true" Height="30" Padding="5" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
-		        <Rectangle CornerRadius="4" Layer="Background">
-		            <Stroke Width="1" Brush="#BBB" />
-		        </Rectangle>
-
+			<Text Margin="0, 20, 0, 0">Pasword:</Text>
+			<PasswordInput Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
 			    <TextInputActionTriggered>
 			        <ReleaseFocus />
 			    </TextInputActionTriggered>
-			</TextInput>-->
-
-			<Text Margin="0, 20, 0, 0">Pasword:</Text>
-			<PasswordInput Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}"/>
+			</PasswordInput>
 
 			<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
 			<WhileNotEmpty Items="{email}">
