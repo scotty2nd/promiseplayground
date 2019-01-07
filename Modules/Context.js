@@ -18,6 +18,7 @@ Backend.getMovies()
 		console.log("Couldn't get movies: " + error);
 	});
 
+
 function registerUser(email, password) {
 	console.log('regiter User');
 	console.log(email);
@@ -75,6 +76,7 @@ function registerUser(email, password) {
 }
 
 
+//Sortiert das ein Objekt nach title
 function compareByTitle(a,b) {
   if (a.title < b.title)
     return -1;
@@ -83,102 +85,103 @@ function compareByTitle(a,b) {
   return 0;
 }
 
+// Prüft eine Email und gibt true/false zurück
 function validateEmail(email) {
   let result = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   
   return result.test(email);
 }
 
+// Prüft ein Passwort auf Stärke und gibt einen Wert(score) zurück
 function checkPassword(strPassword) {
-	// Reset combination count
-	var nScore = 0;
-	const m_strUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-		  m_strLowerCase = "abcdefghijklmnopqrstuvwxyz",
-		  m_strNumber = "0123456789",
-		  m_strCharacters = "!@#$%^&*?_~";
+	let score = 0;
+	const strUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		  strLowerCase = "abcdefghijklmnopqrstuvwxyz",
+		  strNumber = "0123456789",
+		  strCharacters = "!@#$%^&*?_~";
 
-	// Password length
+	// Passwortlänge prüfen
 	if (strPassword.length < 5) {
-		// Less than 4 characters
-	    nScore += 5;
+		// weniger als 4 Zeichen
+	    score += 5;
 	}else if (strPassword.length > 4 && strPassword.length < 8) {
-	    // 5 to 7 characters
-	    nScore += 10;
+	    // 5 - 7 Zeichen
+	    score += 10;
 	}else if (strPassword.length > 7) {
-		// 8 or more
-	    nScore += 25;
+		// mehr als 8 Zeichen
+	    score += 25;
 	}
 
-	// Letters
-	var nUpperCount = countContain(strPassword, m_strUpperCase),
-		nLowerCount = countContain(strPassword, m_strLowerCase),
-		nLowerUpperCount = nUpperCount + nLowerCount;
+	// Buchstaben
+	let upperCount = countContain(strPassword, strUpperCase),
+		lowerCount = countContain(strPassword, strLowerCase),
+		lowerUpperCount = upperCount + lowerCount;
 
-	if (nUpperCount == 0 && nLowerCount != 0) {
-		// Letters are all lower case 
-	    nScore += 10; 
-	}else if (nUpperCount != 0 && nLowerCount != 0) {
-	    // Letters are upper case and lower case 
-	    nScore += 20; 
+	if (upperCount == 0 && lowerCount != 0) {
+		// Buchstaben alle klein geschrieben
+	    score += 10; 
+	}else if (upperCount != 0 && lowerCount != 0) {
+	    // Buchstaben groß und klein geschrieben
+	    score += 20; 
 	}
 
-	// Numbers
-	var nNumberCount = countContain(strPassword, m_strNumber);
+	// Zahlen
+	let numberCount = countContain(strPassword, strNumber);
 
-	if (nNumberCount == 1) {
-	    // 1 number
-	    nScore += 10;
+	if (numberCount == 1) {
+	    // eine Zahl
+	    score += 10;
 	}
 
-	if (nNumberCount >= 3) {
-		// 3 or more numbers
-	    nScore += 20;
+	if (numberCount >= 3) {
+		// mehr als 3 Zahlen
+	    score += 20;
 	}
 
-	// Characters
-	var nCharacterCount = countContain(strPassword, m_strCharacters);
+	// Sonderzeichen
+	var characterCount = countContain(strPassword, strCharacters);
 
-	// 1 character
-	if (nCharacterCount == 1) {
-	    nScore += 10;
+	// 1 Sonderzeichen
+	if (characterCount == 1) {
+	    score += 10;
 	}   
 
-	// More than 1 character
-	if (nCharacterCount > 1) {
-	    nScore += 25;
+	// Mehr als 1 Sonderzeichen
+	if (characterCount > 1) {
+	    score += 25;
 	}
 
-	// Bonus for combination
-	// Letters and numbers
-	if (nNumberCount != 0 && nLowerUpperCount != 0) {
-	    nScore += 2;
+	// Bonus für Kombinationen
+	// Buchstaben und Zahlen
+	if (numberCount != 0 && lowerUpperCount != 0) {
+	    score += 2;
 	}
 
-	// Letters, numbers, and characters
-	if (nNumberCount != 0 && nLowerUpperCount != 0 && nCharacterCount != 0) {
+	// Kleine Buchstaben, Zahlen und Sonderzeichen
+	if (numberCount != 0 && lowerUpperCount != 0 && characterCount != 0) {
 	    nScore += 3;
 	}
 
-	// Mixed case letters, numbers, and characters
-	if (nNumberCount != 0 && nUpperCount != 0 && nLowerCount != 0 && nCharacterCount != 0) {
-	    nScore += 5;
+	// Kleine und Große Buchstaben, Zahlen und Sonderzeichen
+	if (numberCount != 0 && upperCount != 0 && lowerCount != 0 && characterCount != 0) {
+	    score += 5;
 	}
 
-	return nScore;
+	return score;
 }
 
 // Checks a string for a list of characters
 function countContain(strPassword, strCheck) { 
     // Declare variables
-    var nCount = 0;
+    let count = 0;
 
     for (let i = 0; i < strPassword.length; i++) {
         if (strCheck.indexOf(strPassword.charAt(i)) > -1) { 
-        	nCount++;
+        	count++;
         } 
     } 
 
-    return nCount; 
+    return count; 
 } 
 
 /**
