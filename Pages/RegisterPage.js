@@ -11,7 +11,7 @@ function goBack() {
 }
 
 function register() {
-	if( error.value === false) {
+	/*if( error.value === false) {
 		console.log('register kein fehler');
 		console.log(error.value);
 		//Context.registerUser(email.value, password.value);
@@ -23,7 +23,7 @@ function register() {
       		message: 'Invalid or Empty Email Adress',
       		error: true
       	};
-	}
+	}*/
 }
 
 module.exports = {

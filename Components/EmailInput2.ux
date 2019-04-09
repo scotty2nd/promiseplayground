@@ -1,0 +1,44 @@
+<TextInput ux:Class="EmailInput2" Value="{Property Text}" PlaceholderText="e-mail" IsValid="init" PlaceholderColor="#44444450">
+    <string ux:Property="Text" />
+    <string ux:Property="IsValid" />
+
+    <Rectangle CornerRadius="4" Layer="Background">
+        <Stroke ux:Name="stroke" Width="1" Color="#bbb" />
+    </Rectangle>
+
+    <WhileNotFocused>
+        <JavaScript>
+            console.log( "Text: " + this.Text.value );
+            console.log( "IsValid: " + this.IsValid.value );
+
+            var text = this.Text.value;
+            var isValid = this.IsValid.value;
+
+            if(isValid != "init") {
+                if(text && text.length > 3 && text.indexOf('@') != -1 && text.indexOf('.') != -1) {
+                    console.log('true ist valid grün');
+                    this.IsValid.value = true;
+                } else {
+                    console.log('false ist NICHT valid rot');
+                    this.IsValid.value = false;
+                }
+            }
+        </JavaScript>
+
+        <WhileString Value="{Property IsValid}" Equals="true" CaseSensitive="false">
+            <Change stroke.Color="Green" />
+        </WhileString>
+
+        <WhileString Value="{Property IsValid}" Equals="false" CaseSensitive="false">
+            <Change stroke.Color="Red" />
+        </WhileString>
+    </WhileNotFocused>
+
+    <WhileFocused>
+        <JavaScript>
+            this.IsValid.value = false;
+            console.log( "IsValid: " + this.IsValid.value );
+        </JavaScript>
+    </WhileFocused>
+
+</TextInput>
