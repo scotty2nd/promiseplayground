@@ -12,11 +12,16 @@
 			<EmailInput2 />
 
 			<Text Margin="0, 20, 0, 0">Pasword:</Text>
-			<PasswordInput Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
+			<!--<PasswordInput Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
 			    <TextInputActionTriggered>
 			        <ReleaseFocus />
 			    </TextInputActionTriggered>
-			</PasswordInput>
+			</PasswordInput>-->
+			<PasswordInput2 Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
+			    <TextInputActionTriggered>
+			        <ReleaseFocus />
+			    </TextInputActionTriggered>
+			</PasswordInput2>
 
 			<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
 			<WhileNotEmpty Items="{email}">
