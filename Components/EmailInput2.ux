@@ -1,4 +1,4 @@
-<TextInput ux:Class="EmailInput2" Value="{Property Text}" PlaceholderText="e-mail" IsValid="init" PlaceholderColor="#44444450">
+<TextInput ux:Class="EmailInput2" Value="{Property Text}" IsValid="init" Height="30" Padding="5" PlaceholderText="e-mail" PlaceholderColor="#44444450">
     <string ux:Property="Text" />
     <string ux:Property="IsValid" />
 
@@ -8,25 +8,41 @@
 
     <WhileNotFocused>
         <JavaScript>
-            console.log('');
+            console.log(' ');
             console.log('------ Email Start ------');
             console.log( "Text: " + this.Text.value );
             console.log( "IsValid: " + this.IsValid.value );
 
-            var text = this.Text.value;
-            var isValid = this.IsValid.value;
+            let Context = require("Modules/Context");
+            let text = this.Text.value;
+            let isValid = this.IsValid.value;
+
+            Context.status.value = {
+                error: true
+            };
 
             if(isValid != "init") {
                 if(text && text.length > 3 && text.indexOf('@') != -1 && text.indexOf('.') != -1) {
-                    console.log('true ist valid grün');
+                    console.log('true ist valid grï¿½n');
                     this.IsValid.value = true;
+
+                    Context.status.value = {
+                        error: false
+                    };
                 } else {
                     console.log('false ist NICHT valid rot');
                     this.IsValid.value = false;
+
+                    //Set Error Observable to false
+                    Context.status.value = {
+                        message: 'Invalid or Empty Email-Adress',
+                        error: true
+                    };
                 }
             }
 
             console.log('------ Email End ------');
+            console.log(' ');
         </JavaScript>
 
         <WhileString Value="{Property IsValid}" Equals="true" CaseSensitive="false">
