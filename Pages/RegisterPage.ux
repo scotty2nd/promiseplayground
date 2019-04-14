@@ -8,7 +8,6 @@
 			<Text>RegisterPage</Text>
 
 			<Text Margin="0, 20, 0, 0">Mail:</Text>
-			<!--<EmailInput Value="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>-->
 			<EmailInput2 ux:Name="EmailInput2" Value="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
 
 			<Text Margin="0, 20, 0, 0">Pasword:</Text>
@@ -17,7 +16,7 @@
 			        <ReleaseFocus />
 			    </TextInputActionTriggered>
 			</PasswordInput>-->
-			<PasswordInput2 Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
+			<PasswordInput2 ux:Name="PasswordInput2" Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
 			    <TextInputActionTriggered>
 			        <ReleaseFocus />
 			    </TextInputActionTriggered>

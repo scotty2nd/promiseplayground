@@ -12,7 +12,8 @@ function goBack() {
 
 function register() {
 	EmailInput2.validate();
-	console.log(EmailInput2.validate());
+	PasswordInput2.validate();
+	//console.log(EmailInput2.validate());
 }
 
 module.exports = {
