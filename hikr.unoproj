@@ -6,7 +6,6 @@
   ],
   "Includes": [
     "*",
-    "**.js:FuseJS",
     "Modules/*.js:Bundle"
   ]
 }

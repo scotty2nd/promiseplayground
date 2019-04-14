@@ -1,64 +1,40 @@
-<TextInput ux:Class="EmailInput2" Value="{Property Text}" IsValid="init" Height="30" Padding="5" PlaceholderText="e-mail" PlaceholderColor="#44444450">
-    <string ux:Property="Text" />
-    <string ux:Property="IsValid" />
+<TextInput ux:Class="EmailInput2" Value="{Property Text}" IsValid="initial"  Height="30" Padding="5" PlaceholderText="e-mail" PlaceholderColor="#44444450">
+        <string ux:Property="Text" />
+        <string ux:Property="IsValid" />
 
-    <Rectangle CornerRadius="4" Layer="Background">
-        <Stroke ux:Name="stroke" Width="1" Color="#bbb" />
-    </Rectangle>
-
-    <WhileNotFocused>
         <JavaScript>
-            console.log(' ');
-            console.log('------ Email Start ------');
-            console.log( "Text: " + this.Text.value );
-            console.log( "IsValid: " + this.IsValid.value );
+            var text = this.Text;
+            var isValid = this.IsValid;
 
-            let Context = require("Modules/Context");
-            let text = this.Text.value;
-            let isValid = this.IsValid.value;
-
-            Context.status.value = {
-                error: true
+            this.validate = function() {
+                return validateEmail();
             };
 
-            if(isValid != "init") {
-                if(text && text.length > 3 && text.indexOf('@') != -1 && text.indexOf('.') != -1) {
-                    console.log('true ist valid gr�n');
-                    this.IsValid.value = true;
+            function validateEmail() {
+               var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                isValid.value = regex.test(text.value);
 
-                    Context.status.value = {
-                        error: false
-                    };
-                } else {
-                    console.log('false ist NICHT valid rot');
-                    this.IsValid.value = false;
-
-                    //Set Error Observable to false
-                    Context.status.value = {
-                        message: 'Invalid or Empty Email-Adress',
-                        error: true
-                    };
-                }
+                return isValid.value;
             }
 
-            console.log('------ Email End ------');
-            console.log(' ');
+            module.exports = {
+                validateEmail: validateEmail
+            };
         </JavaScript>
 
-        <WhileString Value="{Property IsValid}" Equals="true" CaseSensitive="false">
-            <Change stroke.Color="Green" />
-        </WhileString>
+        <Rectangle CornerRadius="4" Layer="Background">
+            <Stroke ux:Name="stroke" Width="1" Color="#bbb" />
+        </Rectangle>
 
-        <WhileString Value="{Property IsValid}" Equals="false" CaseSensitive="false">
-            <Change stroke.Color="Red" />
-        </WhileString>
-    </WhileNotFocused>
+        <WhileNotFocused>
+            <Callback Handler="{validateEmail}" />
 
-    <WhileFocused>
-        <JavaScript>
-            this.IsValid.value = false;
-            console.log( "IsValid: " + this.IsValid.value );
-        </JavaScript>
-    </WhileFocused>
+            <WhileString Value="{Property IsValid}" Equals="false" CaseSensitive="false">
+                <Change stroke.Color="Red" />
+            </WhileString>
 
-</TextInput>
+            <WhileString Value="{Property IsValid}" Equals="true" CaseSensitive="false">
+                <Change stroke.Color="Green" />
+            </WhileString>
+        </WhileNotFocused>
+    </TextInput>

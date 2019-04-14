@@ -11,19 +11,8 @@ function goBack() {
 }
 
 function register() {
-	/*if( error.value === false) {
-		console.log('register kein fehler');
-		console.log(error.value);
-		//Context.registerUser(email.value, password.value);
-	}else{
-		console.log('register fehler');
-		console.log(error.value);
-		//error.value = true;
-      	Context.status.value = {
-      		message: 'Invalid or Empty Email Adress',
-      		error: true
-      	};
-	}*/
+	EmailInput2.validate();
+	console.log(EmailInput2.validate());
 }
 
 module.exports = {
