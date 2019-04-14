@@ -16,6 +16,7 @@ function register() {
 
 	if(EmailInput2.validate() && PasswordInput2.validate()){
 		Context.registerUser(email.value, password.value);
+	}
 }
 
 module.exports = {
