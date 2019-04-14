@@ -16,11 +16,7 @@
 			        <ReleaseFocus />
 			    </TextInputActionTriggered>
 			</PasswordInput>-->
-			<PasswordInput2 ux:Name="PasswordInput2" Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
-			    <TextInputActionTriggered>
-			        <ReleaseFocus />
-			    </TextInputActionTriggered>
-			</PasswordInput2>
+			<PasswordInput2 ux:Name="PasswordInput2" Text="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}" />
 
 			<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
 			<WhileNotEmpty Items="{email}">

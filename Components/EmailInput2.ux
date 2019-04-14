@@ -1,4 +1,4 @@
-<TextInput ux:Class="EmailInput2" Value="{Property Text}" IsValid="initial"  Height="30" Padding="5" PlaceholderText="e-mail" PlaceholderColor="#44444450">
+<TextInput ux:Class="EmailInput2" Value="{Property Text}" IsValid="initial"  Height="30" Padding="5" PlaceholderText="Gib deine Email Adresse hier ein." PlaceholderColor="#44444450">
         <string ux:Property="Text" />
         <string ux:Property="IsValid" />
 
@@ -23,18 +23,18 @@
         </JavaScript>
 
         <Rectangle CornerRadius="4" Layer="Background">
-            <Stroke ux:Name="stroke" Width="1" Color="#bbb" />
+            <Stroke ux:Name="Stroke" Width="1" Color="#bbb" />
         </Rectangle>
 
         <WhileNotFocused>
             <Callback Handler="{validateEmail}" />
 
             <WhileString Value="{Property IsValid}" Equals="false" CaseSensitive="false">
-                <Change stroke.Color="Red" />
+                <Change Stroke.Color="Red" />
             </WhileString>
 
             <WhileString Value="{Property IsValid}" Equals="true" CaseSensitive="false">
-                <Change stroke.Color="Green" />
+                <Change Stroke.Color="Green" />
             </WhileString>
         </WhileNotFocused>
     </TextInput>
