@@ -11,10 +11,11 @@ function goBack() {
 }
 
 function register() {
-	console.log('register');
 	EmailInput2.validate();
 	PasswordInput2.validate();
-	//console.log(EmailInput2.validate());
+
+	if(EmailInput2.validate() && PasswordInput2.validate()){
+		Context.registerUser(email.value, password.value);
 }
 
 module.exports = {

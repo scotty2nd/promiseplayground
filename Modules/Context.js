@@ -20,13 +20,15 @@ Backend.getMovies()
 
 
 function registerUser(email, password) {
-	console.log('regiter User');
+	console.log('register User');
 	console.log(email);
 	console.log(password);
 	console.log('User Obervable alt');
 	console.dir(user.value);
 	console.log('Status Obervable alt');
 	console.dir(status.value);
+
+	// TO Doprüfen ob das noch refactored werden kann
 
 	if(password == ""){
 		password = null;
