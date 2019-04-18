@@ -3,7 +3,7 @@ let Backend = require("./Backend");
 
 let movies = Observable();
 let user = Observable();
-let status = Observable();
+let status = Observable({ error: true, message: "" });
 
 let baseImageUrl = 'http://image.tmdb.org/t/p/w780';
 

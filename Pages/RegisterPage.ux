@@ -11,11 +11,6 @@
 			<EmailInput2 ux:Name="EmailInput2" Value="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
 
 			<Text Margin="0, 20, 0, 0">Pasword:</Text>
-			<!--<PasswordInput Value="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}">
-			    <TextInputActionTriggered>
-			        <ReleaseFocus />
-			    </TextInputActionTriggered>
-			</PasswordInput>-->
 			<PasswordInput2 ux:Name="PasswordInput2" Text="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}" />
 
 			<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
@@ -43,7 +38,12 @@
 				<Text Value="{error}" />
 			</WhileNotEmpty>
 
-			<Button Text="Register" Clicked="{register}" />
+			<Button Text="Register" HitTestMode="LocalBounds" Clicked="{register}" />
+			<!--<Button ux:Name="RegisterButton" Text="Register" IsEnabled="true" Clicked="{register}">
+				<WhileDisabled>
+					 <Change RegisterButton.Color="Gray" Duration="0.05" DurationBack=".2" />
+				</WhileDisabled>
+			</Button>-->
 			<Button Text="Back" Clicked="{goBack}" />
 		</StackPanel>
 	</ScrollView>
