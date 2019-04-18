@@ -39,11 +39,6 @@
 			</WhileNotEmpty>
 
 			<Button Text="Register" HitTestMode="LocalBounds" Clicked="{register}" />
-			<!--<Button ux:Name="RegisterButton" Text="Register" IsEnabled="true" Clicked="{register}">
-				<WhileDisabled>
-					 <Change RegisterButton.Color="Gray" Duration="0.05" DurationBack=".2" />
-				</WhileDisabled>
-			</Button>-->
 			<Button Text="Back" Clicked="{goBack}" />
 		</StackPanel>
 	</ScrollView>
