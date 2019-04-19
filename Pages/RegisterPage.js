@@ -12,6 +12,12 @@ function goBack() {
 }
 
 function register() {
+	console.log('register click');
+	// Default Werte setzen
+	message.value = "";
+	token.value = "";
+	error.value = true;
+
 	// Email Feld Validierung in Komponent aufrufen
 	EmailInput.validate();
 	// Passwort Validierung in Komponent aufrufen
@@ -29,6 +35,9 @@ function register() {
 					EmailInput.setDefaultStroke();
 					PasswordInput.clear();
 					PasswordInput.setDefaultStroke();
+
+					email.value = "";
+					password.value = "";
 				}
 			})
 			.catch(function(error) {
