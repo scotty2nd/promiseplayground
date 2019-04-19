@@ -7,5 +7,9 @@
   "Includes": [
     "*",
     "Modules/*.js:Bundle"
-  ]
+  ],
+  "Mobile": {
+  	"KeepAlive": true,
+	"Orientations": "Portrait"
+  },
 }

@@ -24,12 +24,18 @@ function register() {
 	PasswordInput.validate();
 
 	if( EmailInput.validate() && PasswordInput.validate() ){
+		//To Do:
+		//Hier loading icon einblenden
+
 		// User Daten an registerUser Funktion übergeben
 		Context.registerUser(email.value, password.value)
 			.then(function(response){
 				let token = response.token;
 
+				//Hier loading icon ausblenden
+
 				if(typeof token !== "undefined"){
+
 					// Set Input to Default Style
 					EmailInput.clear();
 					EmailInput.setDefaultStroke();
@@ -41,6 +47,7 @@ function register() {
 				}
 			})
 			.catch(function(error) {
+				//Hier loading icon ausblenden
 				console.log("Couldn't get register token: " + error);
 			});
 	}
