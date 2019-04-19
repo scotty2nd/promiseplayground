@@ -43,6 +43,8 @@ function registerUser(email, password) {
 					message: "Registration failed",
 					token: ""
 				};
+
+				return response;
 			}
 		})
 		.catch(function(error) {
