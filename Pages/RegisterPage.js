@@ -13,11 +13,11 @@ function goBack() {
 
 function register() {
 	// Email Feld Validierung in Komponent aufrufen
-	EmailInput2.validate();
+	EmailInput.validate();
 	// Passwort Validierung in Komponent aufrufen
-	PasswordInput2.validate();
+	PasswordInput.validate();
 
-	if( EmailInput2.validate() && PasswordInput2.validate() ){
+	if( EmailInput.validate() && PasswordInput.validate() ){
 		// User Daten an registerUser Funktion übergeben
 		Context.registerUser(email.value, password.value);
 	}
