@@ -2,7 +2,7 @@ let Observable = require("FuseJS/Observable");
 let Backend = require("./Backend");
 
 let movies = Observable();
-let user = Observable({ email: "test123", password: "" });
+let user = Observable({ email: "", password: "" });
 let status = Observable({ error: true, message: "", token: "" });
 
 let baseImageUrl = 'http://image.tmdb.org/t/p/w780';

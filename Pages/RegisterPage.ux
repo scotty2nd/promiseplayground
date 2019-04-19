@@ -8,7 +8,7 @@
 			<Text>RegisterPage</Text>
 
 			<Text Margin="0, 20, 0, 0">Mail:</Text>
-			<EmailInput2 ux:Name="EmailInput2" Value="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
+			<EmailInput2 ux:Name="EmailInput2" Text="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next"/>
 
 			<Text Margin="0, 20, 0, 0">Pasword:</Text>
 			<PasswordInput2 ux:Name="PasswordInput2" Text="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}" />
