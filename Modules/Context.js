@@ -27,9 +27,8 @@ function registerUser(email, password) {
 	user.value.password = password;
 
 	//User Daten ans Backend schicken und response verarbeiten
-	Backend.sendRegisterRequest(user.value)
+	return Backend.sendRegisterRequest(user.value)
 		.then(function(response){
-			console.dir(response);	//später entfernen
 			if(response.token){
 				status.value = {
 					error: false,
@@ -37,6 +36,7 @@ function registerUser(email, password) {
 					token: response.token
 				};
 
+				return response;
 			}else {
 				status.value = {
 					error: response.error, 

@@ -18,8 +18,23 @@ function register() {
 	PasswordInput.validate();
 
 	if( EmailInput.validate() && PasswordInput.validate() ){
+		console.log('token in register');
 		// User Daten an registerUser Funktion übergeben
-		Context.registerUser(email.value, password.value);
+		Context.registerUser(email.value, password.value)
+			.then(function(response){
+				let token = response.token;
+
+				if(token != ""){
+					// Set Input to Default Style
+					EmailInput.clear();
+					EmailInput.setDefaultStroke();
+					PasswordInput.clear();
+					PasswordInput.setDefaultStroke();
+				}
+			})
+			.catch(function(error) {
+				console.log("Couldn't get register token: " + error);
+			});
 	}
 }
 
