@@ -6,13 +6,11 @@ let message = Context.status.map(function(x) { return x.message; }).inner();
 let token = Context.status.map(function(x) { return x.token; }).inner();
 let error = Context.status.map(function(x) { return x.error; }).inner();
 
-
 function goBack() {
 	router.goBack();
 }
 
 function register() {
-	console.log('register click');
 	// Default Werte setzen
 	message.value = "";
 	token.value = "";
@@ -26,6 +24,7 @@ function register() {
 	if( EmailInput.validate() && PasswordInput.validate() ){
 		//To Do:
 		//Hier loading icon einblenden
+		LoadingPanel.startLoading();
 
 		// User Daten an registerUser Funktion übergeben
 		Context.registerUser(email.value, password.value)
@@ -33,6 +32,7 @@ function register() {
 				let token = response.token;
 
 				//Hier loading icon ausblenden
+				LoadingPanel.stopLoading();
 
 				if(typeof token !== "undefined"){
 
@@ -48,6 +48,7 @@ function register() {
 			})
 			.catch(function(error) {
 				//Hier loading icon ausblenden
+				LoadingPanel.startLoading();
 				console.log("Couldn't get register token: " + error);
 			});
 	}

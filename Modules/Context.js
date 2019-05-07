@@ -20,8 +20,6 @@ Backend.getMovies()
 
 
 function registerUser(email, password) {
-	console.log('register User Context');
-
 	//UserData in Obervable Object schreiben
 	user.value.email = email;
 	user.value.password = password;

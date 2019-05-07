@@ -1,6 +1,6 @@
 //To Do: mit Context.js zusammenführen Mal ausprobieren.
 function getMovies() {
-	return fetch('https://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year=2018')
+	return fetch('http://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year=2018')
 		.then(function(response){
 	      	if (!response.ok) {
 	        	throw new Error("HTTP error, status = " + response.status);
@@ -13,6 +13,9 @@ function getMovies() {
 
 //To Do: mit Context.js registerUser zusammenführen. Mal ausprobieren.
 function sendRegisterRequest(user) {
+	console.log('sendRegisterRequest');
+	console.dir(user);
+
 	const options = {
 	    method: 'POST',
 	    body: JSON.stringify(user),
@@ -21,6 +24,7 @@ function sendRegisterRequest(user) {
 	    })
 	}
 
+	/*Test User: eve.holt@reqres.in*/
 	return fetch('https://reqres.in/api/register', options)
     	.then(function(response){
     		return response.json();

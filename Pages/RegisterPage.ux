@@ -1,6 +1,6 @@
 <Page ux:Class="RegisterPage">
 	<Router ux:Dependency="router" />
-	
+
 	<JavaScript File="RegisterPage.js" />
 
 	<ScrollView Padding="20">
@@ -42,4 +42,6 @@
 			<Button Text="Back" HitTestMode="LocalBounds" Clicked="{goBack}" Padding="0, 10, 0, 10" />
 		</StackPanel>
 	</ScrollView>
+
+	<LoadingPanel ux:Name="LoadingPanel" />
 </Page>
