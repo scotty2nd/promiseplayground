@@ -22,9 +22,8 @@ function register() {
 	PasswordInput.validate();
 
 	if( EmailInput.validate() && PasswordInput.validate() ){
-		//To Do:
 		//Hier loading icon einblenden
-		LoadingPanel.startLoading();
+		//LoadingPanel.startLoading();
 
 		// User Daten an registerUser Funktion übergeben
 		Context.registerUser(email.value, password.value)
@@ -32,7 +31,7 @@ function register() {
 				let token = response.token;
 
 				//Hier loading icon ausblenden
-				LoadingPanel.stopLoading();
+				//LoadingPanel.stopLoading();
 
 				if(typeof token !== "undefined"){
 
@@ -48,7 +47,7 @@ function register() {
 			})
 			.catch(function(error) {
 				//Hier loading icon ausblenden
-				LoadingPanel.startLoading();
+				//LoadingPanel.startLoading();
 				console.log("Couldn't get register token: " + error);
 			});
 	}

@@ -7,17 +7,19 @@ let status = Observable({ error: true, message: "", token: "" });
 
 let baseImageUrl = 'http://image.tmdb.org/t/p/w780';
 
-// getMovies returns a promise with a array of movie objects
-Backend.getMovies()
-	.then(function(response) {
-		var sortedResponse = response.results.sort(compareByTitle);
+function getMovies() {
+	console.log('Context get Movies');
+	// getMovies returns a promise with a array of movie objects
+	return Backend.getMovies()
+		.then(function(response) {
+			var sortedResponse = response.results.sort(compareByTitle);
 
-		movies.replaceAll(sortedResponse);
-	})
-	.catch(function(error) {
-		console.log("Couldn't get movies: " + error);
-	});
-
+			movies.replaceAll(sortedResponse);
+		})
+		.catch(function(error) {
+			console.log("Couldn't get movies: " + error);
+		});
+}
 
 function registerUser(email, password) {
 	//UserData in Obervable Object schreiben
@@ -113,6 +115,7 @@ module.exports = {
 	baseImageUrl: baseImageUrl,
 
 	updateHike: updateHike,
-	registerUser: registerUser
+	registerUser: registerUser,
+	getMovies: getMovies
 
 };

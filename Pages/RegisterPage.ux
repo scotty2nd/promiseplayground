@@ -43,5 +43,5 @@
 		</StackPanel>
 	</ScrollView>
 
-	<LoadingPanel ux:Name="LoadingPanel" />
+	<!--<LoadingPanel ux:Name="LoadingPanel" />-->
 </Page>

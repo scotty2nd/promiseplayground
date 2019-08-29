@@ -6,7 +6,7 @@
 	<ScrollView>
 		<StackPanel>
 			<WhileNotEmpty Items="{fullposterpath}">
-				<Image Url="{fullposterpath}" />
+				<Image Url="{fullposterpath}" Width="100%" />
 			</WhileNotEmpty>
 			
 			<WhileNotEmpty Items="{title}">

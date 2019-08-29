@@ -1,6 +1,7 @@
 //To Do: mit Context.js zusammenführen Mal ausprobieren.
 function getMovies() {
-	return fetch('http://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year=2018')
+	let current_year = new Date().getFullYear();
+	return fetch('http://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year='+ current_year)
 		.then(function(response){
 	      	if (!response.ok) {
 	        	throw new Error("HTTP error, status = " + response.status);

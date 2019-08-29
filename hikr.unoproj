@@ -10,6 +10,6 @@
   ],
   "Mobile": {
   	"KeepAlive": true,
-	"Orientations": "Portrait"
+	   "Orientations": "Portrait"
   },
 }

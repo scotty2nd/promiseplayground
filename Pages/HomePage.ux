@@ -3,6 +3,10 @@
 
 	<JavaScript File="HomePage.js" />
 
+    <Activated>
+        <Callback Handler="{getMovies}" />
+    </Activated>
+
 	<ScrollView>
 		<StackPanel>
 			<Button Text="Register" Clicked="{goToRegister}" />
@@ -16,11 +20,18 @@
 					<Button Text="{title}" Clicked="{goToMovieDetails}" />
 				</Each>
 			</WhileNotEmpty>
+			
+			<WhileEmpty Items="{movies}">
+				<Panel Height="100">
+					<LoadingPanel ux:Name="LoadingPanel" />
+				</Panel>
+			</WhileEmpty>
 
 			<WhileNotEmpty Items="{token}">
-				<Text>Token:</Text>
+				<Text>Register Token:</Text>
 				<Text Value="{token}" />
 			</WhileNotEmpty>
+
 		</StackPanel>
 	</ScrollView>
 </Page>

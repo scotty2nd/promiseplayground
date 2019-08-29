@@ -1,4 +1,4 @@
-<Panel ux:Class="LoadingPanel" HitTestMode="LocalBounds" Background="#000" Layer="Underlay" Opacity="0">
+<Panel ux:Class="LoadingPanel" HitTestMode="LocalBounds" Background="#fff" Layer="Underlay" Opacity="0">
 	<JavaScript>
 		// Public Function
 		this.startLoading = function() {
@@ -19,5 +19,5 @@
 		<Change this.Opacity=".5" Duration=".4" />
 	</WhileBusy>
 	
-	<LoadingIndicator Opacity="1" ThemeColor="#fff" />
+	<LoadingIndicator Opacity="1" ThemeColor="#ccc" />
 </Panel>
