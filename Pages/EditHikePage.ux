@@ -6,6 +6,10 @@
 	<ScrollView>
 		<StackPanel>
 			<Text Value="{name}" />
+			<WhileNotEmpty Items="{location}">
+				<Text Value="{location}" />
+			</WhileNotEmpty>
+			<Text Value="{distance}" />
 
 			<Text>Name:</Text>
 			<TextBox Value="{name}" />
@@ -21,10 +25,6 @@
 
 			<Text>Comments:</Text>
 			<TextView Value="{comments}" TextWrapping="Wrap" />
-
-			<Text>Title:</Text>
-			<TextBox Value="{title}" />
-			<Image Url="{fullposterpath}" />
 
 			<Button Text="Save" Clicked="{save}" />
 			<Button Text="Cancel" Clicked="{cancel}" />

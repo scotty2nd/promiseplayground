@@ -1,0 +1,23 @@
+<Panel ux:Class="LoadingPanel" HitTestMode="LocalBounds" Background="#fff" Layer="Underlay" Opacity="0">
+	<JavaScript>
+		// Public Function
+		this.startLoading = function() {
+			console.log('startLoading');
+			isBusy.activate();
+		};
+
+		this.stopLoading = function() {
+			console.log('stopLoading');
+			isBusy.deactivate();
+		};
+	</JavaScript>
+
+	<Busy ux:Name="isBusy" IsActive="false" />
+	
+	<WhileBusy>
+		<Change this.Layer="Overlay" />
+		<Change this.Opacity=".5" Duration=".4" />
+	</WhileBusy>
+	
+	<LoadingIndicator Opacity="1" ThemeColor="#ccc" />
+</Panel>

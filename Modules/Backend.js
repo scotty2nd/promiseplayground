@@ -1,3 +1,45 @@
+//To Do: mit Context.js zusammenführen Mal ausprobieren.
+function getMovies() {
+	let current_year = new Date().getFullYear();
+	return fetch('http://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year='+ current_year)
+		.then(function(response){
+	      	if (!response.ok) {
+	        	throw new Error("HTTP error, status = " + response.status);
+	      	}
+
+			return response.json();
+		})
+		.catch((error) => console.error(error));
+}
+
+//To Do: mit Context.js registerUser zusammenführen. Mal ausprobieren.
+function sendRegisterRequest(user) {
+	console.log('sendRegisterRequest');
+	console.dir(user);
+
+	const options = {
+	    method: 'POST',
+	    body: JSON.stringify(user),
+	    headers: new Headers({
+	        'Content-Type': 'application/json'
+	    })
+	}
+
+	/*Test User: eve.holt@reqres.in*/
+	return fetch('https://reqres.in/api/register', options)
+    	.then(function(response){
+    		return response.json();
+    	})
+		.then(function(data){
+    		return data;
+    	})
+    	.catch((error) => console.error(error));
+}
+
+/**
+ * Original Example
+**/
+
 let hikes = [
 	{
 		id: 0,
@@ -48,19 +90,6 @@ let hikes = [
 		comments: "Lorem ipsum"
 	}
 ];
-
-function getMovies() {
-	return fetch('https://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year=2018')
-		.then(function(response){
-	      	if (!response.ok) {
-	        	throw new Error("HTTP error, status = " + response.status);
-	      	}
-
-			return response.json();
-		})
-		.catch((error) => console.error(error));
-}
-
 function getHikes() {
 	return new Promise(function(resolve, reject) {
 		setTimeout(function() { 					// Nur zum Delay testen / Optional
@@ -93,6 +122,7 @@ function updateHike(id, name, location, distance, rating, comments) {
 
 module.exports = {
 	getMovies: getMovies,
+	sendRegisterRequest: sendRegisterRequest,
 	getHikes: getHikes,
 	updateHike: updateHike
 };

@@ -1,4 +1,5 @@
 <App>
+	<Android.StatusBarConfig Color="#0003" IsVisible="True" />
 	<Router ux:Name="router" />
 
 	<ClientPanel>
