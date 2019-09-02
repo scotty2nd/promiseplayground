@@ -19,5 +19,5 @@
 		<Change this.Opacity=".5" Duration=".4" />
 	</WhileBusy>
 	
-	<LoadingIndicator Opacity="1" ThemeColor="#ccc" />
+	<LoadingIndicator Opacity="1" />
 </Panel>

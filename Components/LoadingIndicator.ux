@@ -1,4 +1,4 @@
-<Panel  ux:Class="LoadingIndicator" ThemeColor="#1565C0" Layer="Overlay">
+<Panel  ux:Class="LoadingIndicator" ThemeColor="#000" Layer="Overlay">
     <float4 ux:Property="ThemeColor" />
 
     <Circle ux:Name="rotatingStroke" Width="50" Height="50" StartAngleDegrees="-45" EndAngleDegrees="45">
