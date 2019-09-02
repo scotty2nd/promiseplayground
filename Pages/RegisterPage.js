@@ -25,14 +25,14 @@ function register() {
 		//Loading icon einblenden
 		LoadingPanel.startLoading();
 
-		setTimeout(function(){
-
 		// User Daten an registerUser Funktion übergeben
 		Context.registerUser(email.value, password.value)
 			.then(function(response){
 				let token = response.token;
 
 				if(typeof token !== "undefined"){
+
+					saveTokenToFile(token);
 
 					// Set Input to Default Style
 					EmailInput.clear();
@@ -52,9 +52,15 @@ function register() {
 				LoadingPanel.startLoading();
 				console.log("Couldn't get register token: " + error);
 			});
-
-		}, 10000);
 	}
+}
+
+function saveTokenToFile(token) {
+	console.log('saveToken');
+	let FileSystem = require("FuseJS/FileSystem");
+	let path = FileSystem.dataDirectory + "/" + "token.tmp";
+
+	FileSystem.writeTextToFile(path, token);
 }
 
 module.exports = {
