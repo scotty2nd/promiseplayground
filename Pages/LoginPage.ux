@@ -1,0 +1,11 @@
+<Page ux:Class="LoginPage">
+	<Router ux:Dependency="router" />
+
+	<!--<JavaScript File="LoginPage.js" />-->
+
+	<ScrollView>
+		<StackPanel>
+			<Text>Login Page</Text>
+		</StackPanel>
+	</ScrollView>
+</Page>
