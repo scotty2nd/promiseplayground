@@ -29,6 +29,22 @@ function goToMovieDetails(arg) {
 	router.push("showMovieDetails", movie);
 }
 
+function logout() {
+	console.log('logout');
+
+	let FileSystem = require("FuseJS/FileSystem"),
+		path = FileSystem.dataDirectory + "/" + "token.tmp";
+
+	return FileSystem.delete(path)
+	    .then(function() {
+	        console.log("Delete succeeded");
+	        router.push("login");
+	    }, function(error) {
+	        console.log("Unable to delete file");
+	    });
+}
+
+/*Kann demnächst weg da da auf die Login Seite verschoben wurde*/
 function goToRegister() {
 	router.push("register");
 }
@@ -45,6 +61,7 @@ module.exports = {
 
 	goToHike: goToHike,
 	goToMovieDetails: goToMovieDetails,
+	logout: logout,
 	goToRegister: goToRegister,
 	getMovies: getMovies
 };

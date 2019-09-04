@@ -10,7 +10,8 @@
 	<ScrollView>
 		<StackPanel>
 			<Button Text="Register" Clicked="{goToRegister}" />
-			
+			<Button Text="Logout" Clicked="{logout}" />
+
 			<Each Items="{hikes}">
 				<Button Text="{name}" Clicked="{goToHike}" />
 			</Each>

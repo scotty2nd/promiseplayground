@@ -3,12 +3,13 @@
 	<Router ux:Name="router" />
 
 	<ClientPanel>
-		<Navigator DefaultPath="login">
+		<Navigator DefaultPath="loadingScreen">
+			<LoadingScreen ux:Template="loadingScreen" router="router" />
+			<LoginPage ux:Template="login" router="router" />
+			<RegisterPage ux:Template="register" router="router" />
 			<HomePage ux:Template="home" router="router" />
 			<EditHikePage ux:Template="editHike" router="router" />
 			<ShowMovieDetailsPage ux:Template="showMovieDetails" router="router" />
-			<RegisterPage ux:Template="register" router="router" />
-			<LoginPage ux:Template="login" router="router" />
 		</Navigator>
 	</ClientPanel>
 </App>

@@ -42,10 +42,10 @@ function register() {
 
 					email.value = "";
 					password.value = "";
-
-					//Loading icon ausblenden
-					LoadingPanel.stopLoading();
 				}
+
+				//Loading icon ausblenden
+				LoadingPanel.stopLoading();
 			})
 			.catch(function(error) {
 				//Loading icon ausblenden

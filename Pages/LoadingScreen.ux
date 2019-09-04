@@ -1,0 +1,12 @@
+<Page ux:Class="LoadingScreen">
+	<Router ux:Dependency="router" />
+
+	<JavaScript File="LoadingScreen.js" />
+
+	<Activated>
+        <Callback Handler="{init}" />
+    </Activated>
+
+	<LoadingPanel ux:Name="LoadingPanel" />
+
+</Page>
