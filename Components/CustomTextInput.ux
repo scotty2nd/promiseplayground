@@ -1,0 +1,29 @@
+<StackPanel ux:Class="CustomTextInput" Text="" Placeholder="" IsPassword="false" InputHint="Default" AutoCapitalizationHint="" ActionStyle="" ActionTriggered="">
+    <string ux:Property="Text" />
+    <string ux:Property="Placeholder" />
+    <string ux:Property="IsPassword" />
+    <string ux:Property="InputHint" />
+    <string ux:Property="AutoCapitalizationHint" />
+    <string ux:Property="ActionStyle" />
+    <string ux:Property="ActionTriggered" />
+
+    <TextInput Value="{Property Text}" Height="30" Padding="5" PlaceholderText="{Property Placeholder}" PlaceholderColor="#44444450" InputHint="{Property InputHint}" IsPassword="{Property IsPassword}" AutoCapitalizationHint="{Property AutoCapitalizationHint}" ActionStyle="{Property ActionStyle}">
+        <JavaScript>
+            var text = this.Text;
+
+            // Public Function
+            this.clear = function() {
+                text.value = "";
+                
+                return text.value;
+            };
+            // End of Public Functions
+
+            module.exports = {};
+        </JavaScript>
+
+        <Rectangle CornerRadius="4" Layer="Background">
+            <Stroke ux:Name="Stroke" Width="1" Color="#bbb" />
+        </Rectangle>
+    </TextInput>
+</StackPanel>

@@ -7,6 +7,8 @@ let token = Context.status.map(function(x) { return x.token; }).inner();
 
 function login() {
 	console.log('login');
+	console.log(email.value);
+	console.log(password.value);
 }
 
 function goToRegister() {
