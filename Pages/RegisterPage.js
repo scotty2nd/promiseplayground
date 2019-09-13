@@ -32,7 +32,8 @@ function register() {
 
 				if(typeof token !== "undefined"){
 
-					saveTokenToFile(token);
+					//Wird aktuell in der Login Funktion gemacht
+					//saveTokenToFile(token);
 
 					// Set Input to Default Style
 					EmailInput.clear();
@@ -55,13 +56,14 @@ function register() {
 	}
 }
 
+/*
 function saveTokenToFile(token) {
 	console.log('saveToken');
 	let FileSystem = require("FuseJS/FileSystem");
 	let path = FileSystem.dataDirectory + "/" + "token.tmp";
 
 	FileSystem.writeTextToFile(path, token);
-}
+}*/
 
 module.exports = {
 	email: email,

@@ -1,6 +1,6 @@
 let Context = require("Modules/Context");
-
-//let token = Context.status.map(function(x) { return x.token; }).inner();
+let FileSystem = require("FuseJS/FileSystem"),
+	path = FileSystem.dataDirectory + "/" + "token.tmp";
 
 function init() {
 	console.log('init loading');
@@ -9,32 +9,53 @@ function init() {
 	LoadingPanel.startLoading();
 
 	checkLoginTokenExist()
-		.then(function(token){
-			console.dir('token ' + token);
+		.then(function(data){
+			console.dir('Tokenfile ' + data);
 
 			//Loading icon ausblenden
 			LoadingPanel.stopLoading();
 
-			if(token) {
-				console.log(token);
+			if(data) {
+				console.log('Tokenfile Exist: ' + data);
 				router.push("home");
 			}else {
-				console.log(token);
+				console.log('No Tokenfile Exist: ' + data);
 				router.push("login");
 			}
-		})    
+		})
 		.catch(function(error) {
 			//Loading icon ausblenden
 			LoadingPanel.stopLoading();
-	        console.log("Error in checkologin " + error);
-	    });
+			console.log("Error in checkologin " + error);
+		});
 }
 
 function checkLoginTokenExist(){
-	let FileSystem = require("FuseJS/FileSystem"),
-		path = FileSystem.dataDirectory + "/" + "token.tmp";
+	console.log('CheckLoginTokenFile');
+	//console.log('Sync ' + FileSystem.existsSync(path) ? "Sync It's there!" : "Sync It's missing :/");
 
-	return FileSystem.readTextFromFile(path)
+	if(FileSystem.existsSync(path)) {
+		console.log("Sync It's there!");
+	}else {
+		console.log("Sync It's missing :/");
+	}
+
+	return FileSystem.exists(path)
+		.then(function(file) {
+			if(file) {
+				console.log('Async it\'s there! =)');
+				return true;
+			}else {
+				console.log("Async it's missing :/");
+				return false;
+			}
+		}, function(error) {
+			console.log("Unable to check if file exists");
+			return false;
+		});
+
+
+	/*return FileSystem.readTextFromFile(path)
 	.then(function(data) {
         console.dir("the read file content was " + data);
         return true;
@@ -43,10 +64,9 @@ function checkLoginTokenExist(){
     .catch(function(error) {
         console.log("Unable to read file due to error:" + error);
         return false;
-    });
+    });*/
 }
 
 module.exports = {
-	init: init,
-	checkLoginTokenExist: checkLoginTokenExist
+	init: init
 };

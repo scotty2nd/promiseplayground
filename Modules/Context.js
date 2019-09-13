@@ -52,6 +52,37 @@ function registerUser(email, password) {
 		});
 }
 
+function loginUser(email, password) {
+	//UserData in Obervable Object schreiben
+	user.value.email = email;
+	user.value.password = password;
+
+	//User Daten ans Backend schicken und response verarbeiten
+	return Backend.sendLoginRequest(user.value)
+		.then(function(response){
+			if(response.token){
+				status.value = {
+					error: false,
+					message: "Login Successfull",
+					token: response.token
+				};
+
+				return response;
+			}else {
+				status.value = {
+					error: response.error,
+					message: "Login failed",
+					token: ""
+				};
+
+				return response;
+			}
+		})
+		.catch(function(error) {
+			console.log("Couldn't login user: " + error);
+		});
+}
+
 //Sortiert das ein Objekt nach title
 function compareByTitle(a,b) {
   if (a.title < b.title)
@@ -116,6 +147,7 @@ module.exports = {
 
 	updateHike: updateHike,
 	registerUser: registerUser,
+	loginUser: loginUser,
 	getMovies: getMovies
 
 };

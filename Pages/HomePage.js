@@ -39,7 +39,8 @@ function logout() {
 	    .then(function() {
 	        console.log("Delete succeeded");
 	        router.push("login");
-	    }, function(error) {
+	    })
+		.catch( function(error) {
 	        console.log("Unable to delete file");
 	    });
 }
@@ -47,6 +48,10 @@ function logout() {
 /*Kann demnächst weg da da auf die Login Seite verschoben wurde*/
 function goToRegister() {
 	router.push("register");
+}
+
+function goToLoading() {
+	router.push("loading");
 }
 
 //console.log('Observable');
@@ -57,11 +62,11 @@ module.exports = {
 	movies: Context.movies,
 
 	token: token,
-	LoadingPanel, LoadingPanel,
 
 	goToHike: goToHike,
 	goToMovieDetails: goToMovieDetails,
 	logout: logout,
 	goToRegister: goToRegister,
+	goToLoading: goToLoading,
 	getMovies: getMovies
 };
