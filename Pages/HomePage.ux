@@ -8,9 +8,11 @@
     </Activated>
 
 	<ScrollView>
-		<StackPanel>
+		<StackPanel ItemSpacing="20">
 			<Button Text="Register" Clicked="{goToRegister}" />
-			
+			<Button Text="Logout" Clicked="{logout}" />
+			<Button Text="Loading" Clicked="{goToLoading}" />
+
 			<Each Items="{hikes}">
 				<Button Text="{name}" Clicked="{goToHike}" />
 			</Each>
@@ -28,7 +30,7 @@
 			</WhileEmpty>
 
 			<WhileNotEmpty Items="{token}">
-				<Text>Register Token:</Text>
+				<Text>User Token:</Text>
 				<Text Value="{token}" />
 			</WhileNotEmpty>
 

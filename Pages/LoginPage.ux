@@ -1,0 +1,22 @@
+<Page ux:Class="LoginPage">
+	<Router ux:Dependency="router" />
+
+	<JavaScript File="LoginPage.js" />
+
+	<ScrollView Padding="20">
+		<StackPanel>
+			<Text>Login Page</Text>
+
+			<Text Margin="0, 20, 0, 0">Mail:</Text>
+			<EmailInput ux:Name="EmailInput" Text="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next" />
+
+			<Text Margin="0, 20, 0, 0">Pasword:</Text>
+			<CustomTextInput ux:Name="PasswordInput" Text="{password}" Placeholder="Gib dein Passwort hier ein." IsPassword="true" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{login}" />
+
+			<Button Text="Login" HitTestMode="LocalBounds" Clicked="{login}" Padding="0, 10, 0, 10" />
+			<Button Text="Register" Clicked="{goToRegister}" />
+
+			<Button Text="Loading" Clicked="{goToLoading}" />
+		</StackPanel>
+	</ScrollView>
+</Page>

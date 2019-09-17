@@ -56,11 +56,13 @@
                 <Change Stroke.Color="Green" />
             </WhileString>
 
-            <WhileString Value="{error}" Equals="Email already exist" CaseSensitive="false">
-                <Change this.IsValid="false" />
-                <Change Stroke.Color="Red" />
-                <Change EmailInfo.Visibility="Visible" />
-            </WhileString>
+            <WhileNotEmpty>
+                <WhileString Value="{error}" Equals="Email already exist" CaseSensitive="false">
+                    <Change this.IsValid="false" />
+                    <Change Stroke.Color="Red" />
+                    <Change EmailInfo.Visibility="Visible" />
+                </WhileString>
+            </WhileNotEmpty>
         </WhileNotFocused>
     </TextInput>
 
