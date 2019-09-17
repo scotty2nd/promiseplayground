@@ -31,9 +31,9 @@
 				</Panel>
 			</WhileEmpty>
 
-			<WhileNotEmpty Items="{token}">
+			<WhileNotEmpty Items="{userToken}">
 				<Text>User Token:</Text>
-				<Text Value="{token}" />
+				<Text Value="{userToken}" />
 			</WhileNotEmpty>
 
 		</StackPanel>

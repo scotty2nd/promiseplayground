@@ -11,7 +11,7 @@
 			<EmailInput ux:Name="EmailInput" Text="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next" />
 
 			<Text Margin="0, 20, 0, 0">Pasword:</Text>
-			<PasswordInput ux:Name="PasswordInput" Text="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{register}" />
+			<PasswordInput ux:Name="PasswordInput" Text="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{registerClicked}" />
 
 			<Text Margin="0, 10, 0, 0">Eingegebene Mail: </Text>
 			<WhileNotEmpty Items="{email}">
@@ -23,14 +23,14 @@
 				<Text Value="{password}" />
 			</WhileNotEmpty>
 
-			<Text Margin="0, 10, 0, 0">Message:</Text>
-			<WhileNotEmpty Items="{message}">
-				<Text Value="{message}" />
+			<Text Margin="0, 10, 0, 0">ID:</Text>
+			<WhileNotEmpty Items="{userId}">
+				<Text Value="{userId}" />
 			</WhileNotEmpty>
 
 			<Text Margin="0, 10, 0, 0">Token:</Text>
-			<WhileNotEmpty Items="{token}">
-				<Text Value="{token}" />
+			<WhileNotEmpty Items="{userToken}">
+				<Text Value="{userToken}" />
 			</WhileNotEmpty>
 
 			<Text Margin="0, 10, 0, 0">Error:</Text>
@@ -38,7 +38,7 @@
 				<Text Value="{error}" />
 			</WhileNotEmpty>
 
-			<Button Text="Register" HitTestMode="LocalBounds" Clicked="{register}" Padding="0, 10, 0, 10" />
+			<Button Text="Register" HitTestMode="LocalBounds" Clicked="{registerClicked}" Padding="0, 10, 0, 10" />
 			<Button Text="Back" HitTestMode="LocalBounds" Clicked="{goBack}" Padding="0, 10, 0, 10" />
 		</StackPanel>
 	</ScrollView>

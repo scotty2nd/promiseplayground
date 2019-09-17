@@ -1,7 +1,5 @@
 let Context = require("Modules/Context");
 
-let token = Context.status.map(function(x) { return x.token; }).inner();
-
 function getMovies() {
 	//Loading icon einblenden
 	LoadingPanel.startLoading();
@@ -61,7 +59,7 @@ module.exports = {
 	hikes: Context.hikes,
 	movies: Context.movies,
 
-	token: token,
+	userToken: Context.userToken,
 
 	goToHike: goToHike,
 	goToMovieDetails: goToMovieDetails,

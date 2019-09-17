@@ -1,21 +1,13 @@
 let Context = require("Modules/Context");
 
-//let email = Context.user.map(function(x) { return x.email; }).inner();
-//let password = Context.user.map(function(x) { return x.password; }).inner();
-let message = Context.status.map(function(x) { return x.message; }).inner();
-let token = Context.status.map(function(x) { return x.token; }).inner();
-let error = Context.status.map(function(x) { return x.error; }).inner();
+let email = Context.Observable(),
+	password = Context.Observable();
 
 function goBack() {
 	router.goBack();
 }
 
-function register() {
-	// Default Werte setzen
-	message.value = "";
-	token.value = "";
-	error.value = true;
-
+function registerClicked() {
 	// Email Feld Validierung in Komponent aufrufen
 	EmailInput.validate();
 	// Passwort Validierung in Komponent aufrufen
@@ -25,34 +17,20 @@ function register() {
 		//Loading icon einblenden
 		LoadingPanel.startLoading();
 
-		// User Daten an registerUser Funktion übergeben
-		/*Context.registerUser(email.value, password.value)
+		//Formular Daten an die Api schicken
+		Context.registerUser(email.value, password.value)
 			.then(function(response){
-				let token = response.token;
+				//Loading icon ausblenden
+				LoadingPanel.stopLoading();
 
-				if(typeof token !== "undefined"){
-
-					//Wird aktuell in der Login Funktion gemacht
-					//saveTokenToFile(token);
-
+				if(response) {
 					// Set Input to Default Style
 					EmailInput.clear();
 					EmailInput.setDefaultStroke();
 					PasswordInput.clear();
 					PasswordInput.setDefaultStroke();
-
-					email.value = "";
-					password.value = "";
 				}
-
-				//Loading icon ausblenden
-				LoadingPanel.stopLoading();
-			})
-			.catch(function(error) {
-				//Loading icon ausblenden
-				LoadingPanel.startLoading();
-				console.log("Couldn't get register token: " + error);
-			});*/
+			});
 	}
 }
 
@@ -66,12 +44,11 @@ function saveTokenToFile(token) {
 }*/
 
 module.exports = {
-	//email: email,
-	//password: password,
-	token: token,
-	message: message,
-	error: error,
+	email: email,
+	password: password,
+	userToken: Context.userToken,
+	userId: Context.userId,
 
 	goBack: goBack,
-	register: register
+	registerClicked: registerClicked
 };

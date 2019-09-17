@@ -2,6 +2,8 @@ let Observable = require("FuseJS/Observable"),
 	Backend = require("./Backend");
 
 let movies = Observable(),
+	userToken = Observable(),
+	userId = Observable(),
 	status = Observable({ error: true, message: "", token: "" }),
 	baseImageUrl = 'http://image.tmdb.org/t/p/w780',
 	apiUrl = 'https://reqres.in';
@@ -11,7 +13,7 @@ function getMovies() {
 	// getMovies returns a promise with a array of movie objects
 	let current_year = new Date().getFullYear();
 
-	return fetch('http://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=Title.asc&include_adult=true&include_video=false&page=1&primary_release_year='+ current_year)
+	return fetch('http://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year='+ current_year)
 		.then(function(response){
 			if (!response.ok) {
 				throw new Error("HTTP error, status = " + response.status);
@@ -31,9 +33,8 @@ function getMovies() {
 }
 
 function registerUser(email, password) {
-	let currentUser = {email: email, password: password};
-
-	//UserData in Obervable Object schreiben
+	console.log('register user');
+	let currentUser = {email: 'sydne@fife', password: ''};
 
 	const options = {
 		method: 'POST',
@@ -46,42 +47,21 @@ function registerUser(email, password) {
 	/*Test User: eve.holt@reqres.in*/
 	return fetch(apiUrl + '/api/register', options)
 		.then(function(response){
-			return response.json();
-		})
-		.then(function(data){
-			console.dir(data);
-			return data;
-		})
-		.catch(function(error) {
-			console.log("Couldn't register user: " + error);
-		});
-
-
-/*
-	//User Daten ans Backend schicken und response verarbeiten
-	return Backend.sendRegisterRequest(user.value)
-		.then(function(response){
-			if(response.token){
-				status.value = {
-					error: false,
-					message: "Registration Successfull",
-					token: response.token
-				};
-
-				return response;
+			if (!response.ok) {
+				throw new Error("HTTP error, status = " + response.status);
 			}else {
-				status.value = {
-					error: response.error, 
-					message: "Registration failed",
-					token: ""
-				};
-
-				return response;
+				return response.json();
 			}
 		})
+		.then(function(data){
+			userToken.value = data.token;
+			userId.value = data.id;
+			return true;
+		})
 		.catch(function(error) {
 			console.log("Couldn't register user: " + error);
-		});*/
+			return false;
+		});
 }
 
 function loginUser(email, password) {
@@ -136,7 +116,6 @@ let hikes = Observable();
 Backend.getHikes()
 	.then(function(newHikes) {
 		hikes.replaceAll(newHikes);
-		console.dir(hikes.getAt(2));
 	})
 	.catch(function(error) {
 		console.log("Couldn't get hikes: " + error);
@@ -174,6 +153,8 @@ module.exports = {
 
 	hikes: hikes,
 	movies: movies,
+	userToken: userToken,
+	userId: userId,
 	status: status,
 	baseImageUrl: baseImageUrl,
 
