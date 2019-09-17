@@ -1,7 +1,7 @@
 let Context = require("Modules/Context");
 
-let email = Context.user.map(function(x) { return x.email; }).inner();
-let password = Context.user.map(function(x) { return x.password; }).inner();
+//let email = Context.user.map(function(x) { return x.email; }).inner();
+//let password = Context.user.map(function(x) { return x.password; }).inner();
 let message = Context.status.map(function(x) { return x.message; }).inner();
 let token = Context.status.map(function(x) { return x.token; }).inner();
 let error = Context.status.map(function(x) { return x.error; }).inner();
@@ -26,7 +26,7 @@ function register() {
 		LoadingPanel.startLoading();
 
 		// User Daten an registerUser Funktion übergeben
-		Context.registerUser(email.value, password.value)
+		/*Context.registerUser(email.value, password.value)
 			.then(function(response){
 				let token = response.token;
 
@@ -52,7 +52,7 @@ function register() {
 				//Loading icon ausblenden
 				LoadingPanel.startLoading();
 				console.log("Couldn't get register token: " + error);
-			});
+			});*/
 	}
 }
 
@@ -66,8 +66,8 @@ function saveTokenToFile(token) {
 }*/
 
 module.exports = {
-	email: email,
-	password: password,
+	//email: email,
+	//password: password,
 	token: token,
 	message: message,
 	error: error,

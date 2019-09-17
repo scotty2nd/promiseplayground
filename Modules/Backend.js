@@ -1,30 +1,6 @@
 let apiUrl = 'https://reqres.in';
 
 //To Do: mit Context.js registerUser zusammenführen. Mal ausprobieren.
-function sendRegisterRequest(user) {
-	console.log('sendRegisterRequest');
-	console.dir(user);
-
-	const options = {
-	    method: 'POST',
-	    body: JSON.stringify(user),
-	    headers: new Headers({
-	        'Content-Type': 'application/json'
-	    })
-	}
-
-	/*Test User: eve.holt@reqres.in*/
-	return fetch(apiUrl + '/api/register', options)
-    	.then(function(response){
-    		return response.json();
-    	})
-		.then(function(data){
-    		return data;
-    	})
-    	.catch((error) => console.error(error));
-}
-
-//To Do: mit Context.js registerUser zusammenführen. Mal ausprobieren.
 function sendLoginRequest(user) {
 	console.log('sendLoginRequest');
 	console.dir(user);
@@ -133,7 +109,6 @@ function updateHike(id, name, location, distance, rating, comments) {
 }
 
 module.exports = {
-	sendRegisterRequest: sendRegisterRequest,
 	sendLoginRequest: sendLoginRequest,
 	getHikes: getHikes,
 	updateHike: updateHike

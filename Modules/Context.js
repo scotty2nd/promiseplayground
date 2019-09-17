@@ -1,11 +1,10 @@
-let Observable = require("FuseJS/Observable");
-let Backend = require("./Backend");
+let Observable = require("FuseJS/Observable"),
+	Backend = require("./Backend");
 
-let movies = Observable();
-let user = Observable({ email: "", password: "" });
-let status = Observable({ error: true, message: "", token: "" });
-
-let baseImageUrl = 'http://image.tmdb.org/t/p/w780';
+let movies = Observable(),
+	status = Observable({ error: true, message: "", token: "" }),
+	baseImageUrl = 'http://image.tmdb.org/t/p/w780',
+	apiUrl = 'https://reqres.in';
 
 function getMovies() {
 	console.log('Context get Movies');
@@ -18,15 +17,12 @@ function getMovies() {
 				throw new Error("HTTP error, status = " + response.status);
 			}else {
 				return response.json();
-				console.dir(response.json());
-				//var sortedResponse = response.results.sort(compareByTitle);
-
-				//movies.replaceAll(response);
 			}
 		})
 		.then(function(data){
 			var sortedResponse = data.results.sort(compareByTitle);
 
+			// JSON Response Objekt in Observable kopieren
 			movies.replaceAll(sortedResponse);
 		})
 		.catch(function(error) {
@@ -35,10 +31,33 @@ function getMovies() {
 }
 
 function registerUser(email, password) {
-	//UserData in Obervable Object schreiben
-	user.value.email = email;
-	user.value.password = password;
+	let currentUser = {email: email, password: password};
 
+	//UserData in Obervable Object schreiben
+
+	const options = {
+		method: 'POST',
+		body: JSON.stringify(currentUser),
+		headers: new Headers({
+			'Content-Type': 'application/json'
+		})
+	};
+
+	/*Test User: eve.holt@reqres.in*/
+	return fetch(apiUrl + '/api/register', options)
+		.then(function(response){
+			return response.json();
+		})
+		.then(function(data){
+			console.dir(data);
+			return data;
+		})
+		.catch(function(error) {
+			console.log("Couldn't register user: " + error);
+		});
+
+
+/*
 	//User Daten ans Backend schicken und response verarbeiten
 	return Backend.sendRegisterRequest(user.value)
 		.then(function(response){
@@ -62,7 +81,7 @@ function registerUser(email, password) {
 		})
 		.catch(function(error) {
 			console.log("Couldn't register user: " + error);
-		});
+		});*/
 }
 
 function loginUser(email, password) {
@@ -132,7 +151,6 @@ function updateHike(id, name, location, distance, rating, comments) {
 	for (let i = 0; i < hikes.length; i++) {
 		let hike = hikes.getAt(i);
 
-		console.log(i);
 		if (hike.id == id) {
 			hike.name = name;
 			hike.location = location;
@@ -142,7 +160,6 @@ function updateHike(id, name, location, distance, rating, comments) {
 			hikes.replaceAt(i, hike);
 			break;
 		}
-		//console.dir(hike.name);
 	}
 
 	//Formular Daten an die Api schicken
@@ -157,7 +174,6 @@ module.exports = {
 
 	hikes: hikes,
 	movies: movies,
-	user: user,
 	status: status,
 	baseImageUrl: baseImageUrl,
 

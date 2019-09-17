@@ -13,9 +13,11 @@
 			<Button Text="Logout" Clicked="{logout}" />
 			<Button Text="Loading" Clicked="{goToLoading}" />
 
-			<Each Items="{hikes}">
-				<Button Text="{name}" Clicked="{goToHike}" />
-			</Each>
+			<WhileNotEmpty Items="{hikes}">
+				<Each Items="{hikes}">
+					<Button Text="{name}" Clicked="{goToHike}" />
+				</Each>
+			</WhileNotEmpty>
 
 			<WhileNotEmpty Items="{movies}">
 				<Each Items="{movies}">

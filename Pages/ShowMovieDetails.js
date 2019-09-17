@@ -1,15 +1,15 @@
-let Context = require("Modules/Context");
-let hike = this.Parameter;
+let Context = require("Modules/Context"),
+	movie = this.Parameter;
 
-let title = hike.map(function(x) { return x.title; });
-let posterpath = hike.map(function(x) { return x.poster_path; });
-let backdrop_path = hike.map(function(x) { return x.backdrop_path; });
-let overview = hike.map(function(x) { return x.overview; });
-
+let title = movie.map(function(x) { return x.title; }),
+	backdrop_path = movie.map(function(x) { return x.backdrop_path; }),
+	overview = movie.map(function(x) { return x.overview; }),
+	release_date = movie.map(function(x) { return x.release_date; });
 
 let fullposterpath = Context.Observable(function() {
+	// Wegen des Mappings ist die die Abfrage backdrop_path.value möglich
 	return Context.baseImageUrl + '' + backdrop_path.value;
-})
+});
 
 function goBack() {
 	router.goBack();
@@ -17,9 +17,9 @@ function goBack() {
 
 module.exports = {
 	title: title,
-	fullposterpath: fullposterpath,
-	backdrop_path: backdrop_path,
 	overview: overview,
+	releaseDate: release_date,
+	fullposterPath: fullposterpath,
 
 	goBack: goBack
 };

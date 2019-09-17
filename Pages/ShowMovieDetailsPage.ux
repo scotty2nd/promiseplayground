@@ -5,8 +5,8 @@
 
 	<ScrollView>
 		<StackPanel>
-			<WhileNotEmpty Items="{fullposterpath}">
-				<Image Url="{fullposterpath}" Width="100%" />
+			<WhileNotEmpty Items="{fullposterPath}">
+				<Image Url="{fullposterPath}" Width="100%" />
 			</WhileNotEmpty>
 			
 			<WhileNotEmpty Items="{title}">
@@ -15,6 +15,11 @@
 
 			<WhileNotEmpty Items="{overview}">
 				<Text Value="{overview}" TextWrapping="Wrap" Margin="20" />
+			</WhileNotEmpty>
+
+			<WhileNotEmpty Items="{releaseDate}">
+				<Text Margin="20, 0, 0, 0">Release Date: </Text>
+				<Text Value="{releaseDate}" TextWrapping="Wrap" Margin="20, 0, 0, 20" />
 			</WhileNotEmpty>
 
 			<Button Text="Back" Clicked="{goBack}" />
