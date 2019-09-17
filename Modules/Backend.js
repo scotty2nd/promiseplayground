@@ -1,19 +1,5 @@
 let apiUrl = 'https://reqres.in';
 
-//To Do: mit Context.js zusammenführen Mal ausprobieren.
-function getMovies() {
-	let current_year = new Date().getFullYear();
-	return fetch('http://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year='+ current_year)
-		.then(function(response){
-	      	if (!response.ok) {
-	        	throw new Error("HTTP error, status = " + response.status);
-	      	}
-
-			return response.json();
-		})
-		.catch((error) => console.error(error));
-}
-
 //To Do: mit Context.js registerUser zusammenführen. Mal ausprobieren.
 function sendRegisterRequest(user) {
 	console.log('sendRegisterRequest');
@@ -125,8 +111,8 @@ function getHikes() {
 }
 
 function updateHike(id, name, location, distance, rating, comments) {
-	return new Promise(function(resolve, reject) { // Nur zum Delay testen / Optional
-		setTimeout(function() {
+	return new Promise(function(resolve, reject) {
+		setTimeout(function() {// Nur zum Delay testen // Optional
 
 			for (let hike of hikes) {
 
@@ -147,7 +133,6 @@ function updateHike(id, name, location, distance, rating, comments) {
 }
 
 module.exports = {
-	getMovies: getMovies,
 	sendRegisterRequest: sendRegisterRequest,
 	sendLoginRequest: sendLoginRequest,
 	getHikes: getHikes,

@@ -10,9 +10,22 @@ let baseImageUrl = 'http://image.tmdb.org/t/p/w780';
 function getMovies() {
 	console.log('Context get Movies');
 	// getMovies returns a promise with a array of movie objects
-	return Backend.getMovies()
-		.then(function(response) {
-			var sortedResponse = response.results.sort(compareByTitle);
+	let current_year = new Date().getFullYear();
+
+	return fetch('http://api.themoviedb.org/3/discover/movie?api_key=7aaf5378d6e8d9175dd95506a8882468&language=de-DE&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&primary_release_year='+ current_year)
+		.then(function(response){
+			if (!response.ok) {
+				throw new Error("HTTP error, status = " + response.status);
+			}else {
+				return response.json();
+				console.dir(response.json());
+				//var sortedResponse = response.results.sort(compareByTitle);
+
+				//movies.replaceAll(response);
+			}
+		})
+		.then(function(data){
+			var sortedResponse = data.results.sort(compareByTitle);
 
 			movies.replaceAll(sortedResponse);
 		})
@@ -92,6 +105,8 @@ function compareByTitle(a,b) {
   return 0;
 }
 
+
+
 /**
  * Original Example
 **/
@@ -102,6 +117,7 @@ let hikes = Observable();
 Backend.getHikes()
 	.then(function(newHikes) {
 		hikes.replaceAll(newHikes);
+		console.dir(hikes.getAt(2));
 	})
 	.catch(function(error) {
 		console.log("Couldn't get hikes: " + error);
