@@ -17,9 +17,9 @@
 				<Text Value="{overview}" TextWrapping="Wrap" Margin="20" />
 			</WhileNotEmpty>
 
-			<WhileNotEmpty Items="{releaseDate}">
+			<WhileNotEmpty Items="{formatedReleaseDate}">
 				<Text Margin="20, 0, 0, 0">Release Date: </Text>
-				<Text Value="{releaseDate}" TextWrapping="Wrap" Margin="20, 0, 0, 20" />
+				<Text Value="{formatedReleaseDate}" TextWrapping="Wrap" Margin="20, 0, 0, 20" />
 			</WhileNotEmpty>
 
 			<Button Text="Back" Clicked="{goBack}" />

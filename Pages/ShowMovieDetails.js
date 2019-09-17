@@ -11,6 +11,12 @@ let fullposterpath = Context.Observable(function() {
 	return Context.baseImageUrl + '' + backdrop_path.value;
 });
 
+let formatedReleaseDate = Context.Observable(function() {
+	let date = new Date(release_date.value);
+
+	return date.getDate() + "/" +  (date.getMonth()+1) + "/" + date.getFullYear();
+});
+
 function goBack() {
 	router.goBack();
 }
@@ -20,6 +26,7 @@ module.exports = {
 	overview: overview,
 	releaseDate: release_date,
 	fullposterPath: fullposterpath,
+	formatedReleaseDate: formatedReleaseDate,
 
 	goBack: goBack
 };
