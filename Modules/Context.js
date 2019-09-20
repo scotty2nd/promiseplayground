@@ -2,8 +2,11 @@ let Observable = require("FuseJS/Observable"),
 	Backend = require("./Backend");
 
 let movies = Observable(),
+	email = Observable(),
+	password = Observable(),
 	userToken = Observable(),
 	userId = Observable(),
+	errorMessage = Observable(),
 	status = Observable({ error: true, message: "", token: "" }),
 	baseImageUrl = 'http://image.tmdb.org/t/p/w780',
 	apiUrl = 'https://reqres.in';
@@ -34,7 +37,7 @@ function getMovies() {
 
 function registerUser(email, password) {
 	console.log('register user');
-	let currentUser = {email: 'sydne@fife', password: ''};
+	let currentUser = {email: email, password: password};
 
 	const options = {
 		method: 'POST',
@@ -47,16 +50,19 @@ function registerUser(email, password) {
 	/*Test User: eve.holt@reqres.in*/
 	return fetch(apiUrl + '/api/register', options)
 		.then(function(response){
-			if (!response.ok) {
-				throw new Error("HTTP error, status = " + response.status);
-			}else {
-				return response.json();
-			}
+			return response.json();
 		})
 		.then(function(data){
-			userToken.value = data.token;
-			userId.value = data.id;
-			return true;
+			if(data.token) {
+				clearErrorMessage();
+				userToken.value = data.token;
+				userId.value = data.id;
+				return true;
+			}else {
+				console.log(data.error);
+				errorMessage.value = data.error;
+				return false
+			}
 		})
 		.catch(function(error) {
 			console.log("Couldn't register user: " + error);
@@ -93,6 +99,10 @@ function loginUser(email, password) {
 		.catch(function(error) {
 			console.log("Couldn't login user: " + error);
 		});
+}
+
+function clearErrorMessage() {
+	errorMessage.clear();
 }
 
 //Sortiert das ein Objekt nach title
@@ -153,13 +163,16 @@ module.exports = {
 
 	hikes: hikes,
 	movies: movies,
+	email: email,
+	password: password,
 	userToken: userToken,
 	userId: userId,
-	status: status,
+	errorMessage: errorMessage,
 	baseImageUrl: baseImageUrl,
 
 	updateHike: updateHike,
 	registerUser: registerUser,
+	clearErrorMessage: clearErrorMessage,
 	loginUser: loginUser,
 	getMovies: getMovies
 

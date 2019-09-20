@@ -2,11 +2,11 @@ let Context = require("Modules/Context");
 
 ///let email = Context.user.map(function(x) { return x.email; }).inner();
 //let password = Context.user.map(function(x) { return x.password; }).inner();
-let token = Context.status.map(function(x) { return x.token; }).inner();
-/*
+//let token = Context.status.map(function(x) { return x.token; }).inner();
+
 function login() {
 	// Email Feld Validierung in Komponent aufrufen
-	if(EmailInput.validate() && password.value != ""){
+	/*if(EmailInput.validate() && password.value != ""){
 		console.log('login');
 		console.log(email.value);
 		console.log(password.value);
@@ -46,8 +46,8 @@ function login() {
 			});
 	}else {
 		console.log('Login clicked but Error');
-	}
-}*/
+	}*/
+}
 
 function saveTokenToFile(token) {
 	console.log('saveToken ' + token);
@@ -66,11 +66,13 @@ function goToLoading() {
 }
 
 module.exports = {
-	//email: email,
-	//password: password,
+	email: Context.email,
+	password: Context.password,
+	errorMessage: Context.errorMessage,
+
 	//token: token,
 
-	//login: login,
+	login: login,
 	goToRegister: goToRegister,
 	goToLoading: goToLoading
 };

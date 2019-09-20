@@ -1,15 +1,12 @@
 let Context = require("Modules/Context");
 
-let email = Context.Observable(),
-	password = Context.Observable();
-
 function goBack() {
 	router.goBack();
 }
 
 function registerClicked() {
 	// Email Feld Validierung in Komponent aufrufen
-	EmailInput.validate();
+	//EmailInput.validate();
 	// Passwort Validierung in Komponent aufrufen
 	PasswordInput.validate();
 
@@ -18,7 +15,7 @@ function registerClicked() {
 		LoadingPanel.startLoading();
 
 		//Formular Daten an die Api schicken
-		Context.registerUser(email.value, password.value)
+		Context.registerUser(Context.email.value, Context.password.value)
 			.then(function(response){
 				//Loading icon ausblenden
 				LoadingPanel.stopLoading();
@@ -44,10 +41,11 @@ function saveTokenToFile(token) {
 }*/
 
 module.exports = {
-	email: email,
-	password: password,
+	email: Context.email,
+	password: Context.password,
 	userToken: Context.userToken,
 	userId: Context.userId,
+	errorMessage: Context.errorMessage,
 
 	goBack: goBack,
 	registerClicked: registerClicked

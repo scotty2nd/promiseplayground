@@ -8,7 +8,7 @@
 			<Text>RegisterPage</Text>
 
 			<Text Margin="0, 20, 0, 0">Mail:</Text>
-			<EmailInput ux:Name="EmailInput" Text="{email}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next" />
+			<EmailInput ux:Name="EmailInput" Text="{email}" ErrorMessage="{errorMessage}" InputHint="Email" AutoCapitalizationHint="None" ActionStyle="Next" />
 
 			<Text Margin="0, 20, 0, 0">Pasword:</Text>
 			<PasswordInput ux:Name="PasswordInput" Text="{password}" AutoCapitalizationHint="None" ActionStyle="Done" ActionTriggered="{registerClicked}" />
@@ -34,8 +34,8 @@
 			</WhileNotEmpty>
 
 			<Text Margin="0, 10, 0, 0">Error:</Text>
-			<WhileNotEmpty Items="{error}">
-				<Text Value="{error}" />
+			<WhileNotEmpty Items="{errorMessage}">
+				<Text Value="{errorMessage}" />
 			</WhileNotEmpty>
 
 			<Button Text="Register" HitTestMode="LocalBounds" Clicked="{registerClicked}" Padding="0, 10, 0, 10" />

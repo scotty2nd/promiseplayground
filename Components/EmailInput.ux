@@ -1,5 +1,6 @@
-<StackPanel ux:Class="EmailInput" Text="" IsValid="initial" InputHint="Email" AutoCapitalizationHint="" ActionStyle="" ActionTriggered="">
+<StackPanel ux:Class="EmailInput" Text="" ErrorMessage="" IsValid="initial" InputHint="Email" AutoCapitalizationHint="" ActionStyle="" ActionTriggered="">
     <string ux:Property="Text" />
+    <string ux:Property="ErrorMessage" />
     <string ux:Property="IsValid" />
     <string ux:Property="InputHint" />
     <string ux:Property="AutoCapitalizationHint" />
@@ -8,8 +9,10 @@
 
     <TextInput Value="{Property Text}" Height="30" Padding="5" PlaceholderText="Gib deine Email Adresse hier ein." PlaceholderColor="#44444450" InputHint="{Property InputHint}" AutoCapitalizationHint="{Property AutoCapitalizationHint}" ActionStyle="{Property ActionStyle}">
         <JavaScript>
-            var text = this.Text;
-            var isValid = this.IsValid;
+            let Context = require("Modules/Context"),
+                text = this.Text,
+                errorMessage = this.ErrorMessage,
+                isValid = this.IsValid;
 
             // Public Function
             this.validate = function() {
@@ -30,14 +33,21 @@
             // End of Public Functions
 
             function validateEmail() {
-               var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
                 isValid.value = regex.test(text.value);
 
                 return isValid.value;
             }
 
+            function hideErrorMessage() {
+                Context.clearErrorMessage();
+                errorMessage.value = "";
+            }
+
             module.exports = {
-                validateEmail: validateEmail
+                validateEmail: validateEmail,
+                hideErrorMessage: hideErrorMessage
             };
         </JavaScript>
 
@@ -55,24 +65,23 @@
             <WhileString Value="{Property IsValid}" Equals="true" CaseSensitive="false">
                 <Change Stroke.Color="Green" />
             </WhileString>
-
-            <WhileNotEmpty>
-                <WhileString Value="{error}" Equals="Email already exist" CaseSensitive="false">
-                    <Change this.IsValid="false" />
-                    <Change Stroke.Color="Red" />
-                    <Change EmailInfo.Visibility="Visible" />
-                </WhileString>
-            </WhileNotEmpty>
         </WhileNotFocused>
+
+        <WhileFocused>
+            <Callback Handler="{hideErrorMessage}" />
+        </WhileFocused>
+
+        <WhileString Value="{Property ErrorMessage}" Equals="Email already exist" CaseSensitive="false">
+            <DebugAction Message="Property ErrorMessage is SET" />
+            <Change this.IsValid="false" />
+            <Change EmailInfo.Visibility="Visible" />
+        </WhileString>
     </TextInput>
 
     <Rectangle ux:Name="EmailInfo" CornerRadius="4" Visibility="Collapsed" Margin="0, 10, 0, 0" Padding="10">
         <Stroke Width="1" Color="Red" />
         <StackPanel>
             <Text TextWrapping="Wrap" FontSize="14">Diese Email Adresse ist bereits registriert</Text>
-            <!--<Text TextWrapping="Wrap" FontSize="12" Margin="0, 5, 0, 0">
-                Das Passwort muss mindestens 8 Zeichen lang sein und einen Großbuchstaben, einen Kleinbuchstaben und eine Ziffer enthalten.
-            </Text>-->
         </StackPanel>
     </Rectangle>
 </StackPanel>
